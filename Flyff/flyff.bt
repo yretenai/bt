@@ -1,0 +1,186 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: flyff.bt
+//	Authors: Legiayayana
+//	Version: 1
+//	Purpose: FlyFF Common Structures
+//	Category: Misc
+//------------------------------------------------
+
+#include "../Math.bt"
+
+struct _obfstr {
+	byte len;
+	byte data[len]<optimize=true>;
+};
+
+typedef _obfstr obfstr<read=ReadObfuscatedString>;
+
+string ReadObfuscatedString(obfstr &v) {
+	string s;
+	int i;
+	for (i = 0; i < v.len; ++i) {
+		s += Str("%c", (char) v.data[i] ^ 0xCD);
+	}
+	return s;
+}
+
+struct AnimationFrame {
+	Vector4D Rotation;
+	Vector3D Position;
+};
+
+struct MotionAttribute {
+	uint Type;
+	int SoundID;
+	float Frame;
+};
+
+struct Bone {
+	PString Name;
+	if (parentof(this).UseGlobalMatrix) {
+		Matrix4x4 Matrix;
+	}
+	Matrix4x4 InverseMatrix;
+	Matrix4x4 LocalMatrix;
+	int ParentId;
+};
+
+struct BoneAnimation {
+	bool HasKeyframes;
+	if (HasKeyframes) {
+		AnimationFrame Frames[parentof(this).FrameCount];
+	} else {
+		Matrix4x4 Pose;
+	}
+};
+
+struct Motion {
+	local int BoneCount = parentof(this).BoneCount;
+	local int FrameCount = parentof(this).FrameCount;
+	local int UseGlobalMatrix = 0;
+
+	Bone Bones[BoneCount]<optimize=false>;
+	int AnimationCount; // BoneCount * FrameCount
+	BoneAnimation Animations[BoneCount]<optimize=false>;
+};
+
+struct Force {
+	Vector3D Force0;
+	Vector3D Force1;
+	if (parentof(this).Version >= 22) {
+		Vector3D Force2;
+		Vector3D Force3;
+	}
+};
+
+enum <uint> GameObjectType {
+	GMT_Invalid = -1,
+	GMT_Normal,
+	GMT_Skin,
+	GMT_Bone,
+	GMT_Light = 0x8000
+};
+
+struct NormalVertex {
+	Vector3D Position;
+	Vector3D Normal;
+	Vector2D UV;
+};
+
+struct SkinVertex {
+	Vector3D Position;
+	Vector2D Weight;
+	Vector2H Index;
+	Vector3D Normal;
+	Vector2D UV;
+};
+
+struct CollisionVertex {
+	Vector3D Position;
+	int Color;
+};
+
+struct Material {
+	Vector4D Diffuse;
+	Vector4D Ambient;
+	Vector4D Specular;
+	Vector4D Emissive;
+	float Power;
+	PString TextureName;
+};
+
+struct MaterialBlock {
+	int StartVertex;
+	int PrimitiveCount;
+	uint MaterialId;
+	uint Effect;
+	int Amount;
+	int UsedBoneCount;
+	int UsedBones[28];
+};
+
+struct GameObjectInfo {
+	AABB Bounds;
+	bool Opacity;
+	bool Bump;
+	bool Rigid;
+	int Reserved[7];
+	int VertexListCount;
+	int VertexCount;
+	int IndexListCount;
+	int IndexCount;
+	Vector3D VertexList[VertexListCount];
+	if ((parentof(this).Type & 0xFFFF) == GMT_Skin) {
+		SkinVertex Vertices[VertexCount];
+	} else {
+		NormalVertex Vertices[VertexCount];
+	}
+	ushort Indices[IndexCount];
+	ushort IIB[VertexCount];
+	bool HasPhysique;
+	if (HasPhysique) {
+		uint PhysiqueVertices[VertexListCount];
+	}
+	bool HasMaterial;
+	if (HasMaterial) {
+		int MaterialCount;
+		Material Materials[MaterialCount == 0 ? 1 : MaterialCount]<optimize=false>;
+	}
+	int MaterialBlockCount;
+	if (MaterialBlockCount) {
+		MaterialBlock MaterialBlocks[MaterialBlockCount];
+	}
+};
+
+struct GameObject {
+	GameObjectType Type;
+	int UsedBoneCount;
+	if (UsedBoneCount) {
+		int UsedBones[UsedBoneCount];
+	}
+	int Id;
+	int ParentId;
+	if (ParentId != -1) {
+		GameObjectType ParentType;
+	}
+	Matrix4x4 Transform;
+	GameObjectInfo Info;
+	if ((Type & 0xFFFF) == GMT_Normal && parentof(this).FrameCount) {
+		bool HasFrames;
+		if (HasFrames) {
+			AnimationFrame Frames[parentof(this).FrameCount];
+		}
+	}
+};
+
+struct CollisionObject {
+	local GameObjectType Type = GMT_Normal;
+	GameObjectInfo Info;
+};
+
+struct LODGroup {
+	int ObjectCount;
+	GameObject Objects[ObjectCount]<optimize=false>;
+};

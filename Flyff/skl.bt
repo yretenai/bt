@@ -1,0 +1,33 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: skl.bt
+//	Authors: Legiayayana
+//	Version: 7
+//	Purpose: FlyFF WindEngine Skeleton
+//	Category: Graphics
+//	File Mask: *.chr;*.skl
+//------------------------------------------------
+
+#include "flyff.bt"
+
+struct Skeleton {
+	local int UseGlobalMatrix = 1;
+
+	int Version<fgcolor=0x0040C0>;
+	uint Id<format=hex,fgcolor=0xC040C0>;
+	int BoneCount;
+	Bone Bones[BoneCount]<optimize=false>;
+	bool SendVS;
+	Matrix4x4 LocalRH;
+	Matrix4x4 LocalShield;
+	Matrix4x4 LocalKnuckle;
+	if (Version >= 5) {
+		Vector3D Events[Version == 5 ? 4 : 8];
+		int EventParentIds[Version == 5 ? 4 : 8];
+	}
+
+	if (Version >= 7) {
+		Matrix4x4 LocalLH;
+	}
+} skl;

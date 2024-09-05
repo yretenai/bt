@@ -1,0 +1,103 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: Math.bt
+//	Authors: Legiayayana
+//	Version: 1
+//	Purpose: Common Math Structures
+//	Category: Misc
+//------------------------------------------------
+
+typedef uint bool<read=ReadBool>;
+typedef byte flag<read=ReadFlag>;
+
+string ReadBool(bool v) {
+	return v > 0 ? "true" : "false";
+}
+
+string ReadFlag(flag v) {
+	return v > 0 ? "true" : "false";
+}
+
+struct _vector4d {
+	float x;
+	float y;
+	float z;
+	float w;
+};
+
+struct _vector3d {
+	float x;
+	float y;
+	float z;
+};
+
+struct _vector2d {
+	float x;
+	float y;
+};
+
+struct _vector2h {
+	ushort x;
+	ushort y;
+};
+
+struct _pstr {
+	int size;
+	if (size) {
+		char data[size];
+	}
+};
+
+typedef _vector4d Vector4D<read=ReadVector4D>;
+typedef _vector3d Vector3D<read=ReadVector3D>;
+typedef _vector2d Vector2D<read=ReadVector2D>;
+typedef _vector2h Vector2H<read=ReadVector2H>;
+typedef _pstr PString<read=ReadPascalString>;
+
+struct _matrix44 {
+	Vector4D m1;
+	Vector4D m2;
+	Vector4D m3;
+	Vector4D m4;
+};
+
+struct _aabb {
+	Vector3D Min;
+	Vector3D Max;
+};
+
+typedef _matrix44 Matrix4x4;
+typedef _aabb AABB;
+
+string ReadVector4D(Vector4D &v) {
+	string s;
+	SPrintf(s, "{ %g, %g, %g, %g }", v.x, v.y, v.z, v.w);
+	return s;
+}
+
+string ReadVector3D(Vector3D &v) {
+	string s;
+	SPrintf(s, "{ %g, %g, %g }", v.x, v.y, v.z);
+	return s;
+}
+
+string ReadVector2D(Vector2D &v) {
+	string s;
+	SPrintf(s, "{ %g, %g }", v.x, v.y);
+	return s;
+}
+
+string ReadVector2H(Vector2H &v) {
+	string s;
+	SPrintf(s, "{ %g, %g }", v.x, v.y);
+	return s;
+}
+
+string ReadPascalString(PString &str) {
+	if (str.size == 0) {
+		return "";
+	}
+
+	return str.data;
+}

@@ -1,0 +1,33 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: ani.bt
+//	Authors: Legiayayana
+//	Version: 10
+//	Purpose: FlyFF WindEngine Animation
+//	Category: Graphics
+//	File Mask: *.ani
+//------------------------------------------------
+
+#include "flyff.bt"
+
+struct Animation {
+	local int UseGlobalMatrix = 1;
+
+	int Version<fgcolor=0x0040C0>;
+	uint Id<format=hex,fgcolor=0xC040C0>;
+	float Slerp;
+	int Reserved[8];
+	int BoneCount;
+	int FrameCount;
+	bool HasPaths;
+	if (HasPaths) {
+		Vector3D Paths[FrameCount];
+	}
+	Motion Data;
+	MotionAttribute Attributes[FrameCount];
+	int EventCount;
+	if (EventCount) {
+		Vector3D Events[EventCount];
+	}
+} ani;

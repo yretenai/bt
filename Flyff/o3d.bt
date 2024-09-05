@@ -1,0 +1,52 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: o3d.bt
+//	Authors: Legiayayana
+//	Version: 22
+//	Purpose: FlyFF WindEngine Object3D
+//	Category: Graphics
+//	File Mask: *.o3d
+//------------------------------------------------
+
+#include "flyff.bt"
+
+struct Object3D {
+	obfstr filename<fgcolor=0x1CACFF>;
+	int Version<fgcolor=0x0040C0>;
+	uint Id<format=hex,fgcolor=0xC040C0>;
+	Force Forces;
+	Vector2D ScrollUV;
+	int Reserved[4]; // uninitialized memory, might have fun stuff
+	AABB BoundingBox;
+	float Slerp;
+	int FrameCount;
+	int EventCount;
+	if (EventCount) {
+		Vector3D Events[EventCount];
+	}
+	bool HasCollision;
+	if (HasCollision) {
+		CollisionObject Collision;
+	}
+	bool HasLOD;
+	int BoneCount;
+	if (BoneCount) {
+		Matrix4x4 BoneMatrices[BoneCount];
+		Matrix4x4 BoneInverseMatrices[BoneCount];
+		if (FrameCount) {
+			Motion Frames[FrameCount];
+		}
+		bool SendVS;
+	}
+	int GameObjectCount;
+	LODGroup LODGroups[HasLOD ? 3 : 1]<optimize=false>;
+	if (FrameCount) {
+		if (Version >= 21) {
+			int AttributeCount;
+			MotionAttribute FrameAttributes[AttributeCount];
+		} else {
+			MotionAttribute FrameAttributes[FrameCount];
+		}
+	}
+} o3d;
