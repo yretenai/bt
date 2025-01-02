@@ -12,7 +12,7 @@
 #include "flyff.bt"
 
 struct Object3D {
-	obfstr filename<fgcolor=0x1CACFF>;
+	//obfstr filename<fgcolor=0x1CACFF>;
 	int Version<fgcolor=0x0040C0>;
 	uint Id<format=hex,fgcolor=0xC040C0>;
 	Force Forces;

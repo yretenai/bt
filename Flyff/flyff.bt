@@ -181,6 +181,7 @@ struct CollisionObject {
 };
 
 struct LODGroup {
+    local int FrameCount = parentof(this).FrameCount;
 	int ObjectCount;
 	GameObject Objects[ObjectCount]<optimize=false>;
 };

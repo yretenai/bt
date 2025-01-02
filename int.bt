@@ -1,0 +1,40 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: int.bt
+//	Authors: Legiayayana
+//	Version: 1
+//	Purpose: Common Integer Structures
+//	Category: Misc
+//------------------------------------------------
+
+typedef uint bool<read=ReadBool>;
+typedef byte flag<read=ReadFlag>;
+typedef uint64 uint64_t;
+typedef uint32 uint32_t;
+typedef uint16 uint16_t;
+typedef uint8 uint8_t;
+typedef int64 int64_t;
+typedef int32 int32_t;
+typedef int16 int16_t;
+typedef int8 int8_t;
+typedef hfloat half;
+typedef uint64 u64;
+typedef uint32 u32;
+typedef uint16 u16;
+typedef uint8 u8;
+typedef int64 s64;
+typedef int32 s32;
+typedef int16 s16;
+typedef int8 s8;
+typedef double f64;
+typedef float f32;
+typedef hfloat f16;
+
+string ReadBool(bool v) {
+	return v > 0 ? "true" : "false";
+}
+
+string ReadFlag(flag v) {
+	return v > 0 ? "true" : "false";
+}

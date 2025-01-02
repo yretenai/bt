@@ -1,0 +1,150 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//      File: 
+//   Authors: 
+//   Version: 
+//  Category: File Archive
+// File Mask: *.forge
+//  ID Bytes: 73 63 69 6D 69 74 61 72 00
+//   History: 
+//------------------------------------------------
+
+#include "../int.bt"
+#include "../Math.bt"
+
+typedef struct FORGE_HEADER {
+    string Magic; // "scimitar"
+    uint32_t Version;
+    int64_t FATOffset;
+    uint64_t Id;
+    int32_t Flags;
+    int32_t Unknown;
+} ForgeHeader;
+
+// file may point to a sequence of container headers. Read until size is reached.
+typedef struct FORGE_FAT_FILE {
+    int64_t Offset;
+    uint64 Id;
+    int32_t Size;
+} ForgeFATFile;
+
+typedef struct FORGE_FAT_STATUS {
+    uint32_t Data;
+    uint64_t Id;
+    uint32_t Attributes;
+} ForgeFATStatus;
+
+typedef struct FORGE_FAT_ATTRIBUTE {
+    int32_t CompressedSize;
+    uint64_t Hash;
+    uint32_t Version;
+    uint32_t TypeId;
+    uint64_t Attributes;
+    int32_t Next;
+    int32_t Previous;
+    int32_t Parent;
+    int32_t Timestamp;
+    char Name[0x80];
+    ForgeFATStatus Status;
+    int32_t Flags;
+} ForgeFATAttribute;
+
+struct ForgeFATSpan;
+
+typedef struct FORGE_FAT_SPAN {
+    int32_t FileCount;
+    int32_t DirectoryCount;
+    int64_t FileOffset;
+    int64_t EndOffset;
+    int32_t FirstIndex;
+    int32_t LastIndex;
+    int64_t AttributeOffset;
+    int64_t DirectoryOffset;
+    
+    local int64_t rewind = FTell();
+    if (FileOffset > -1) {
+    	FSeek(FileOffset);
+		ForgeFATFile indices[FileCount];
+    }
+    if (AttributeOffset > -1) {
+    	FSeek(AttributeOffset);
+		ForgeFATAttribute attributes[FileCount];
+    }
+    if (DirectoryOffset > -1) {
+    	FSeek(DirectoryOffset);
+		ForgeFATSpan subdirectories[DirectoryCount];
+    }
+    FSeek(rewind);
+} ForgeFATSpan;
+
+typedef struct FORGE_FAT {
+    int32_t FileCount;
+    int32_t DirectoryCount;
+    int64_t MaxId;
+    int32_t RootId;
+    int32_t FirstFreeFile;
+    int32_t FirstFreeDir;
+    int32_t SizeOfSpan;
+    int32_t SpanCount;
+    int64_t SpanOffset;
+    
+    local int64_t rewind = FTell();
+    FSeek(SpanOffset);
+    ForgeFATSpan spans[SpanCount]<optimize=false>;
+	FSeek(rewind);
+} ForgeFAT;
+
+typedef struct FORGE_CONTAINER_BLOCK_INFO {
+    int32_t UncompressedSize;
+    int32_t CompressedSize; 
+} ForgeContainerBlockInfo;
+
+typedef struct FORGE_CONTAINER_BLOCK {
+    uint32_t Checksum;
+    uint8_t Data[CompressedSize];
+} ForgeContainerBlock;
+
+typedef enum <uint8_t> FORGE_COMPRESSION_TYPE {
+    LZOPRO_LZ01X_W03_15,
+    LZO1X_999,
+    LZO2A,
+    LZ4,
+    LZ4_HC,
+    KRAKEN_SUPERFAST,
+    KRAKEN_OPT3,
+    MERMAID_SUPERFAST,
+    MERMAID_OPT3,
+    SELKIE_VERYFAST,
+    SELKIE_OPT3,
+    NO_COMPRESSION,
+    ZLIB
+} ForgeCompressionType;
+
+typedef struct FORGE_CONTAINER_HEADER {
+    uint32_t Magic;
+    uint32_t ContainerType;
+    uint16_t Version;
+    ForgeCompressionType CompressionType;
+    uint32_t Flags;
+    int32_t BlockCount;
+    ForgeContainerBlockInfo Blocks[BlockCount]<optimize=true>;
+} ForgeContainerHeader;
+
+// ForgeHeader header;
+// FSeek(header.FATOffset);
+// ForgeFAT fat;
+
+typedef struct FORGE_FILE_HEADER {
+    uint32_t Tag;
+    uint32_t Size;
+    PString Name;
+    flag HasAllocatorInfo;
+    flag DeclareObjectId;
+    if(DeclareObjectId) {
+        uint64_t Uid;
+    }
+    uint32_t ClassId;
+} ForgeFileHeader;
+
+ForgeFileHeader file;

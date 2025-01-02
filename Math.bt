@@ -8,17 +8,6 @@
 //	Category: Misc
 //------------------------------------------------
 
-typedef uint bool<read=ReadBool>;
-typedef byte flag<read=ReadFlag>;
-
-string ReadBool(bool v) {
-	return v > 0 ? "true" : "false";
-}
-
-string ReadFlag(flag v) {
-	return v > 0 ? "true" : "false";
-}
-
 struct _vector4d {
 	float x;
 	float y;
