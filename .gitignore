@@ -1,0 +1,14 @@
+# ignore everything
+**/*
+
+# unmask files we want
+!Flyff
+!RAD
+!Forge
+
+!*.md
+!*.hexpat
+!*.bt
+!.gitignore
+!.gitattributes
+!LICENSE
