@@ -1,0 +1,90 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: gr2.bt
+//	Authors: Legiayayana
+//	Version: 1
+//	Purpose: Granny 2 Resource Format
+//	Category: Graphics
+//	File Mask: *.gr2
+//------------------------------------------------
+
+#include "../int.bt"
+#include "../Math.bt"
+
+typedef enum GRANNY_COMPRESSTYPE {
+	None,
+	OodleLZH,
+	OodleLZF,
+	BitKnitLZH,
+	BitKnitLZF,
+} Granny2Compression;
+
+typedef enum GRANNY_SECTOR_TYPE {
+	Main,
+	RigidVertex,
+	RigidIndex,
+	DeformableVertex,
+	DeformableIndex,
+	Texture,
+	Discard,
+	Unloaded
+} Granny2SectorId;
+
+typedef struct GRANNY_HEADER {
+	GUID magic;
+	uint32_t headerSize;
+	uint32_t version;
+	uint32_t reserved[2];
+} Granny2Header;
+
+typedef struct GRANNY_REFERENCE {
+	uint32_t section;
+	uint32_t offset;
+} Granny2Ref;
+
+typedef struct GRANNY_FILE_INFO {
+	uint32_t version;
+	uint32_t fileSize;
+	uint32_t checksum;
+	uint32_t sectorOffset;
+	uint32_t sectorCount;
+	Granny2Ref type;
+	Granny2Ref root;
+	uint32_t tag;
+	uint32_t extraTags[4];
+	uint32_t stringChecksum;
+	uint32_t reserved[3];
+} Granny2FileInfo;
+
+typedef struct GRANNY_SECTOR {
+	Granny2Compression compressType;
+	uint32_t offset;
+	uint32_t compressedSize;
+	uint32_t size;
+	uint32_t alignment;
+	uint32_t meta1;
+	uint32_t meta2;
+	uint32_t fixupOffset;
+	uint32_t fixupCount;
+	uint32_t marshalFixupOffset;
+	uint32_t marshalFixupCount;
+} Granny2Sector;
+
+typedef struct GRANNY_FIXUP {
+	uint32_t from;
+	Granny2Ref to;
+} Granny2Fixup;
+
+typedef struct GRANNY_MARSHAL_FIXUP {
+	uint32_t count;
+	Granny2Fixup fixup;
+} Granny2MarshalFixup;
+
+typedef struct GRANNY_FILE {
+	Granny2Header header;
+	Granny2FileInfo fileInfo;
+	Granny2Sector sectors[fileInfo.sectorCount];
+} Granny2File;
+
+Granny2File header;
