@@ -38,11 +38,19 @@ struct _pstr {
 	}
 };
 
+struct _pwstr {
+	int size;
+	if (size) {
+		wchar_t data[size];
+	}
+};
+
 typedef _vector4d Vector4D<read=ReadVector4D>;
 typedef _vector3d Vector3D<read=ReadVector3D>;
 typedef _vector2d Vector2D<read=ReadVector2D>;
 typedef _vector2h Vector2H<read=ReadVector2H>;
 typedef _pstr PString<read=ReadPascalString>;
+typedef _pwstr PWString<read=ReadPascalWString>;
 
 struct _matrix44 {
 	Vector4D m1;
@@ -89,4 +97,19 @@ string ReadPascalString(PString &str) {
 	}
 
 	return str.data;
+}
+
+wstring ReadPascalWString(PWString &str) {
+	if (str.size == 0) {
+		return "";
+	}
+
+	return str.data;
+}
+
+void FAlign(int n) {
+    local int64 pos = FTell();
+	if ((pos % n) != 0) {
+		FSkip(n - (pos % n));
+	}
 }

@@ -1,0 +1,51 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: terrain.bt
+//	Authors: Legiayayana
+//	Version: 1
+//	Purpose: World of Warships Terrain Heightmap
+//	Category: Graphics
+//  ID Bytes: 74 72 62 00
+//------------------------------------------------
+
+#include "../int.bt"
+
+struct TerrainHeader {
+	uint32_t magic;
+	uint32_t width;
+	uint32_t height;
+	uint16_t table_size;
+	uint16_t format;
+	float min;
+	float max;
+	float table[(table_size * table_size) << 1];
+};
+
+struct TerrainSlice {
+	float start;
+	float curve;
+	local float prev = start;
+	local float next = curve;
+	local int additional = 0;
+	while(prev != next) {
+		float curve;
+		prev = next;
+		next = curve;
+		additional += 1;
+	}
+	int repeat;
+	local int32_t total = repeat + additional;
+};
+
+struct TerrainFile {
+	TerrainHeader header;
+	local int32_t total = header.width * header.height;
+	local int32_t remain = header.width * header.height;
+	while (remain > 0) {
+		TerrainSlice slice;
+		remain -= slice.total;
+	}
+};
+
+TerrainFile file;
