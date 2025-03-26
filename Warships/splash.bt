@@ -1,0 +1,26 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.1 Binary Template
+//
+//      File: splash.bt
+//   Authors: Legiayayana
+//   Version: 1
+//   Purpose: Splash Data
+//  Category: Graphics
+// File Mask: *.splash
+//------------------------------------------------
+
+#include "../int.bt"
+#include "../Math.bt"
+
+struct box {
+    uint32_t nameSize;
+    char name[nameSize];
+    AABB bounds;
+};
+
+struct splash {
+    uint32_t count;
+    box entries[count]<optimize=false>;
+};
+
+splash file;

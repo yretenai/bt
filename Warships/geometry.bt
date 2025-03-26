@@ -1,0 +1,126 @@
+//------------------------------------------------
+//--- 010 Editor v15.0.1 Binary Template
+//
+//      File: geometry.bt
+//   Authors: Legiayayana
+//   Version: 1
+//   Purpose: Geometry Mesh Data
+//  Category: Graphics
+// File Mask: *.geometry
+//------------------------------------------------
+
+#include "../int.bt"
+#include "../Math.bt"
+
+struct geometry_header {
+    int32_t vertex_buffer_count;
+    int32_t index_buffer_count;
+    int32_t vertex_name_count;
+    int32_t index_name_count;
+    int32_t buffer3_count;
+    int32_t armor_buffer_count;
+
+    int64_t ptr_vertex_names;
+    int64_t ptr_index_names;
+    int64_t ptr_vertex_buffers;
+    int64_t ptr_index_buffers;
+    int64_t ptr_buffer3s;
+    int64_t ptr_armor_buffers;
+};
+
+struct name_entry {
+	uint32_t name_hash;
+    uint16_t buffer_index;
+    uint16_t mesh_id;
+    int32_t buffer_offset;
+    int32_t buffer_length;
+};
+
+struct vertex_buffer {
+    local long pos = FTell();
+    int64_t ptr_buffer;
+    int64_t vertex_format_length;
+    int64_t ptr_vertex_format;
+    int32_t buffer_length;
+    int16_t vertex_stride;
+    flag is_skinned;
+    flag has_tangent;
+
+    local long tmp = FTell();
+    FSeek(pos + 8 + ptr_vertex_format);
+    char vertex_format[vertex_format_length]; // usually ENCD data
+    FSeek(pos + ptr_buffer);
+    uint8_t buffer[buffer_length];
+    FSeek(tmp);
+};
+
+struct index_buffer {
+    local long pos = FTell();
+    int64_t ptr_buffer;
+    int32_t buffer_length;
+    uint16_t unknown;
+    int16_t index_stride;
+
+    local long tmp = FTell();
+    FSeek(pos + ptr_buffer);
+    uint8_t buffer[buffer_length]; // usually ENCD data
+    FSeek(tmp);
+};
+
+struct armor_vertex {
+    Vector3D pos;
+    uint8_t unknown[4]; // relative thickness? max = 0x7F, 0x7F, 0xFF. Maybe for color grading?
+};
+
+struct armor_plate {
+    uint16_t thickness;
+    uint16_t id;
+    AABB bounding_box;
+    int32_t vertex_count;
+    armor_vertex vertices[vertex_count];
+};
+
+struct armor_block {
+    uint32_t id;
+    AABB bounding_box;
+    int32_t plate_count;
+    armor_plate plates[plate_count]<optimize=false>;
+};
+
+struct armor_buffer {
+    local long pos = FTell();
+    int64_t buffer_length;
+    int64_t name_length;
+    int64_t ptr_name;
+    int64_t ptr_buffer;
+
+    local long tmp = FTell();
+    FSeek(pos + 8 + ptr_name);
+    char vertex_format[name_length];
+    FSeek(pos + ptr_buffer);
+    armor_block armor;
+    FSeek(tmp);
+};
+
+struct geometry {
+	geometry_header header;
+
+    FSeek(header.ptr_vertex_names);
+    name_entry vertex_names[header.vertex_name_count];
+
+    FSeek(header.ptr_index_names);
+    name_entry index_names[header.index_name_count];
+
+    FSeek(header.ptr_vertex_buffers);
+    vertex_buffer vertex_buffers[header.vertex_buffer_count]<optimize=false>;
+
+    FSeek(header.ptr_index_buffers);
+    index_buffer index_buffers[header.index_buffer_count]<optimize=false>;
+
+    // todo: find a mesh with buffer3
+
+    FSeek(header.ptr_armor_buffers);
+    armor_buffer armor_buffers[header.armor_buffer_count]<optimize=false>;
+};
+
+geometry file;

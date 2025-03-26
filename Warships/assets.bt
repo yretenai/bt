@@ -1,0 +1,116 @@
+//------------------------------------------------
+//--- 010 Editor v15.0 Binary Template
+//
+//	File: assets.bt
+//	Authors: Legiayayana
+//	Version: 1
+//	Purpose: World of Warships Assets DB
+//	Category: Graphics
+//  ID Bytes: 42 44 57 42
+//------------------------------------------------
+
+#include "../int.bt"
+
+struct BWFileHeader {
+	uint32_t magic;
+	uint32_t version;
+	uint32_t hash;
+	uint32_t pointer_size;
+};
+
+struct BWDBDictionary {
+	local long pos = FTell();
+	uint64_t count;
+	uint64_t key_ptr;
+	uint64_t value_ptr;
+
+	local long pos2 = FTell();
+	uint64_t data_count;
+	uint64_t data_ptr;
+};
+
+struct BWDBHeader {
+	local long pos = FTell();
+	BWDBDictionary ids;
+	BWDBDictionary assets;
+
+	local long pos2 = FTell();
+	uint64_t data_count;
+	uint64_t data_ptr;
+};
+
+struct BWDBIdKey {
+	uint32_t hash;
+	uint32_t flags;
+};
+
+struct BWDBAssetKey {
+	uint64_t hash;
+	uint32_t reserved;
+	uint32_t flags;
+};
+
+struct BWDBId {
+	local long pos = FTell();
+	uint32_t ptr;
+	if(ptr != 0) {
+		FSeek(parentof(this).data_ptr + ptr);
+		string name;
+		FSeek(pos + 4);
+	}
+};
+
+struct BWDBName {
+	uint64_t id;
+	uint64_t parent_id;
+	uint64_t data_count;
+	uint64_t data_ptr;
+};
+
+struct BWDBRootName {
+	local long pos = FTell();
+	uint32_t id;
+	uint32_t version;
+	uint64_t data_count;
+	uint64_t data_ptr;
+    FSeek(pos + data_ptr);
+    uint8_t data[data_count]<bgcolor=0x558855>;
+    FSeek(pos + 0x18);
+};
+
+struct BWDBIdDictionary {
+	local long base = parentof(this).header.ids.pos;
+	FSeek(base + parentof(this).header.ids.key_ptr);
+	BWDBIdKey keys[parentof(this).header.ids.count]<optimize=true, bgcolor=0x776622>;
+
+	local long data_ptr = base + parentof(this).header.ids.data_ptr;
+	FSeek(base + parentof(this).header.ids.value_ptr);
+	uint32_t value_ofs[parentof(this).header.ids.count]<optimize=false, bgcolor=0x226677>; // relative to data_ptr
+};
+
+struct BWDBAssetDictionary {
+	local long base = parentof(this).header.assets.pos;
+	local long data_ptr = base + parentof(this).header.assets.key_ptr;
+	FSeek(data_ptr);
+	BWDBAssetKey keys[parentof(this).header.assets.count]<optimize=true, bgcolor=0x776622>;
+
+	FSeek(base + parentof(this).header.assets.value_ptr);
+	uint32_t value_ofs[parentof(this).header.assets.count]<bgcolor=0xff0000>;
+   	uint32_t value_ofs[parentof(this).header.assets.count]<optimize=true, bgcolor=0x226677>; // relative to data_ptr
+
+	FSeek(parentof(this).header.assets.pos2 + parentof(this).header.assets.data_ptr);
+	BWDBName names[parentof(this).header.assets.data_count]<optimize=true, bgcolor=0x627762>;
+};
+
+struct BWDB {
+	BWFileHeader file;
+	BWDBHeader header;
+
+	BWDBIdDictionary ids<bgcolor=0x0000FF>;
+	BWDBAssetDictionary assets;
+
+	FSeek(header.pos + header.data_ptr);
+	BWDBRootName roots[header.data_count]<optimize=false>; // prefab lists
+};
+
+BWDB db;
