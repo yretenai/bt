@@ -1,13 +1,12 @@
 //------------------------------------------------
 //--- 010 Editor v15.0 Binary Template
 //
-//      File: 
-//   Authors: 
-//   Version: 
+//      File: forge.bt
+//   Authors: Legiayayana
+//   Version: 1
 //  Category: File Archive
 // File Mask: *.forge
 //  ID Bytes: 73 63 69 6D 69 74 61 72 00
-//   History: 
 //------------------------------------------------
 
 #include "../int.bt"
@@ -61,7 +60,7 @@ typedef struct FORGE_FAT_SPAN {
     int32_t LastIndex;
     int64_t AttributeOffset;
     int64_t DirectoryOffset;
-    
+
     local int64_t rewind = FTell();
     if (FileOffset > -1) {
     	FSeek(FileOffset);
@@ -88,7 +87,7 @@ typedef struct FORGE_FAT {
     int32_t SizeOfSpan;
     int32_t SpanCount;
     int64_t SpanOffset;
-    
+
     local int64_t rewind = FTell();
     FSeek(SpanOffset);
     ForgeFATSpan spans[SpanCount]<optimize=false>;
@@ -97,7 +96,7 @@ typedef struct FORGE_FAT {
 
 typedef struct FORGE_CONTAINER_BLOCK_INFO {
     int32_t UncompressedSize;
-    int32_t CompressedSize; 
+    int32_t CompressedSize;
 } ForgeContainerBlockInfo;
 
 typedef struct FORGE_CONTAINER_BLOCK {
