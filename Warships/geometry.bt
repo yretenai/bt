@@ -17,14 +17,14 @@ struct geometry_header {
     int32_t index_buffer_count;
     int32_t vertex_name_count;
     int32_t index_name_count;
-    int32_t buffer3_count;
+    int32_t collision_buffer_count;
     int32_t armor_buffer_count;
 
     int64_t ptr_vertex_names;
     int64_t ptr_index_names;
     int64_t ptr_vertex_buffers;
     int64_t ptr_index_buffers;
-    int64_t ptr_buffer3s;
+    int64_t ptr_collision_buffers;
     int64_t ptr_armor_buffers;
 };
 
@@ -96,9 +96,37 @@ struct armor_buffer {
 
     local long tmp = FTell();
     FSeek(pos + 8 + ptr_name);
-    char vertex_format[name_length];
+    char name[name_length];
     FSeek(pos + ptr_buffer);
     armor_block armor;
+    FSeek(tmp);
+};
+
+struct collision_shape {
+    int32_t vertex_count;
+    Vector3D vertices[vertex_count];
+    int32_t index_count;
+    // weird format follows.
+};
+
+struct collision_block {
+    uint8_t unknown[4];
+    int32_t shape_count;
+    // todo: collision_shape shapes[1]<optimize=false>;
+};
+
+struct collision_buffer {
+    local long pos = FTell();
+    int64_t buffer_length;
+    int64_t name_length;
+    int64_t ptr_name;
+    int64_t ptr_buffer;
+
+    local long tmp = FTell();
+    FSeek(pos + 8 + ptr_name);
+    char name[name_length];
+    FSeek(pos + ptr_buffer);
+    collision_block collision;
     FSeek(tmp);
 };
 
@@ -117,7 +145,8 @@ struct geometry {
     FSeek(header.ptr_index_buffers);
     index_buffer index_buffers[header.index_buffer_count]<optimize=false>;
 
-    // todo: find a mesh with buffer3
+    FSeek(header.ptr_collision_buffers);
+    collision_buffer collision_buffers[header.collision_buffer_count]<optimize=false>;
 
     FSeek(header.ptr_armor_buffers);
     armor_buffer armor_buffers[header.armor_buffer_count]<optimize=false>;
