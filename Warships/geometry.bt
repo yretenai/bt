@@ -102,17 +102,30 @@ struct armor_buffer {
     FSeek(tmp);
 };
 
-struct collision_shape {
+struct collision_face {
+    int32_t count;
+    uint32_t loop_a[count];
+    uint32_t loop_b[count];
+    if(parentof(this).version > 0x26092011) {
+        uint32_t unknown; // always zero? bool maybe?
+    }
+};
+
+struct collision_surface {
+    local int32_t version = parentof(this).version;
     int32_t vertex_count;
     Vector3D vertices[vertex_count];
-    int32_t index_count;
-    // weird format follows.
+    // these two make up a convex hull.
+    int32_t edge_count;
+    int32_t edges[edge_count * 2];
+    int32_t face_count;
+    collision_face faces[face_count]<optimize=false>;
 };
 
 struct collision_block {
-    uint8_t unknown[4];
-    int32_t shape_count;
-    // todo: collision_shape shapes[1]<optimize=false>;
+    uint32_t version;
+    int32_t count;
+    collision_surface surfaces[1]<optimize=false>;
 };
 
 struct collision_buffer {
