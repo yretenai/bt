@@ -10,6 +10,7 @@
 !*.md
 !*.hexpat
 !*.bt
+!*.py
 !.gitignore
 !.gitattributes
 !LICENSE
