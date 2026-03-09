@@ -102,30 +102,32 @@ struct armor_buffer {
     FSeek(tmp);
 };
 
-struct collision_face {
+struct collision_convex_polygon {
     int32_t count;
-    uint32_t loop_a[count];
-    uint32_t loop_b[count];
+    uint32_t adjacent_faces[count];
+    uint32_t perimeter_faces[count];
     if(parentof(this).version > 0x26092011) {
-        uint32_t unknown; // always zero? bool maybe?
+        uint32_t physics_mask;
     }
 };
 
-struct collision_surface {
+struct collision_convex_hull {
     local int32_t version = parentof(this).version;
+
     int32_t vertex_count;
     Vector3D vertices[vertex_count];
-    // these two make up a convex hull.
+
     int32_t edge_count;
     int32_t edges[edge_count * 2];
-    int32_t face_count;
-    collision_face faces[face_count]<optimize=false>;
+
+    int32_t polygon_count;
+    collision_convex_polygon polygons[polygon_count]<optimize=false>;
 };
 
-struct collision_block {
+struct collision_mesh {
     uint32_t version;
     int32_t count;
-    collision_surface surfaces[1]<optimize=false>;
+    collision_convex_hull hulls[count]<optimize=false>;
 };
 
 struct collision_buffer {
@@ -139,7 +141,7 @@ struct collision_buffer {
     FSeek(pos + 8 + ptr_name);
     char name[name_length];
     FSeek(pos + ptr_buffer);
-    collision_block collision;
+    collision_mesh mesh;
     FSeek(tmp);
 };
 
