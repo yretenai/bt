@@ -1,3 +1,1 @@
-*.bt text eol=lf diff=c linguist-language=c
-*.pat text eol=lf diff=rust linguist-language=Rust
 *.hexpat text eol=lf diff=rust linguist-language=Rust
