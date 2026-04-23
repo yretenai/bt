@@ -5,7 +5,7 @@
 #pragma author Neptuwunium
 #pragma description FlyFF WindEngine Object3D
 
-#include "FlyFF/FlyFF.hexpat"
+#include "FlyFF.hexpat"
 
 struct Object3D {
 	ObfuscatedString name;

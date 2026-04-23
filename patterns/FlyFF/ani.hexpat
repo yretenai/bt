@@ -5,7 +5,7 @@
 #pragma author Neptuwunium
 #pragma description FlyFF WindEngine Animations
 
-#include "FlyFF/FlyFF.hexpat"
+#include "FlyFF.hexpat"
 
 struct Animation {
 	bool use_global_matrix = true;

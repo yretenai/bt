@@ -5,7 +5,7 @@
 #pragma author Neptuwunium
 #pragma description FlyFF WindEngine Skeletons
 
-#include "FlyFF/FlyFF.hexpat"
+#include "FlyFF.hexpat"
 
 struct Skeleton {
 	bool use_global_matrix = true;

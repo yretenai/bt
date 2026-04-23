@@ -5,7 +5,7 @@
 #pragma author Neptuwunium
 #pragma description Forge Tagged Property File
 
-#include "Forge/Forge.hexpat"
+#include "Forge.hexpat"
 #include "NeptuwuniumInt.hexpat"
 
 struct BlockAllocatorInfo<Type> {
