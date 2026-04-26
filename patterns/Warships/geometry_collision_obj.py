@@ -30,7 +30,7 @@ class CollisionHull:
 class Collision:
 	def __init__(self, f):
 		(version, count) = struct.unpack('<Ii', f.read(8))
-		self.hulls = [CollisionHull(f, version) for i in range(0, count)] 
+		self.hulls = [CollisionHull(f, version) for i in range(0, count)]
 
 
 coll = None

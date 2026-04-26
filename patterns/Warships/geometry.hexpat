@@ -96,7 +96,7 @@ struct CollisionConvexPolygon {
 	int32_t count;
 	uint32_t adjacent_faces[count];
 	uint32_t perimeter_faces[count];
-	
+
 	if(parent.parent.version > 0x26092011) {
 		uint32_t physics_mask;
 	}

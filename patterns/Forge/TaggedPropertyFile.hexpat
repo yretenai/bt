@@ -18,7 +18,7 @@ struct BlockAllocator {
 
 	if (version == 0) {
 		uint16_t count;
-		BlockAllocatorInfo<uint32_t> allocator_info[count]; 
+		BlockAllocatorInfo<uint32_t> allocator_info[count];
 	} else {
 		if (version > 2) {
 			bool has_partial_info;

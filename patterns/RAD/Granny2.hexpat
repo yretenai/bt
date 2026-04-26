@@ -17,7 +17,7 @@ enum Granny2Compression : uint32_t {
 	BitKnitLZH,
 	BitKnitLZF,
 };
-
+ss
 enum Granny2SectorId : uint32_t {
 	Main,
 	RigidVertex,
@@ -37,7 +37,7 @@ struct Granny2Header {
 };
 
 struct Granny2Ref {
-	uint32_t section;
+	uint32_t from;
 	uint32_t offset;
 };
 
@@ -71,7 +71,7 @@ struct Granny2Sector {
 
 struct Granny2Fixup {
 	uint32_t from;
-	Granny2Ref to;
+	Granny2Ref target;
 };
 
 struct Granny2MarshalFixup {
