@@ -37,7 +37,7 @@ struct Granny2Header {
 };
 
 struct Granny2Ref {
-	uint32_t from;
+	uint32_t section;
 	uint32_t offset;
 };
 
@@ -70,7 +70,7 @@ struct Granny2Sector {
 };
 
 struct Granny2Fixup {
-	uint32_t from;
+	uint32_t offset;
 	Granny2Ref target;
 };
 
