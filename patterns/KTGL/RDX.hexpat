@@ -26,7 +26,7 @@ fn format_rbx(ref RBXEntry rbx) {
 		path += "enUS/";
 	}
 
-	return std::format("{}0x{:08x}.file ({:04x})", path, rbx.file_id, rbx.index);
+	return std::format("{}0x{:08x}.fdata ({:04x})", path, rbx.file_id, rbx.index);
 };
 
 RBXEntry entries[while($ < std::mem::size())] @ 0x0;

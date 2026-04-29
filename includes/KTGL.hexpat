@@ -58,7 +58,9 @@ bitfield RDBFlags {
 	unknown1 : 16;
 	RDBLocationType location_type : 4;
 	RDBStorageType storage_type : 4;
-	unknown2 : 8;
+	unknown2 : 4; // some indexer
+	unknown3 : 2;
+	unknown4 : 2;
 } [[fixed_size(4)]];
 
 enum OBJDBPropertyType : uint32_t {
@@ -73,7 +75,7 @@ enum OBJDBPropertyType : uint32_t {
 	Float32,
 	Float64,
 	Vector4F,
-	Quaternion,
+	Matrix4F,
 	Vector2F,
 	Vector3F,
 	None,
