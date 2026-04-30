@@ -11,21 +11,21 @@ fn format_ktid(ref KTID id) {
 };
 
 enum KTGLPlatform : uint32_t {
-	Generic,
+	D3D9,
 	PS3,
 	X360,
-	NWii,
-	NDS,
-	N3DS,
-	PSVita,
+	RVL,
+	NTR,
+	CTR,
+	NGP,
 	Android,
 	iOS,
-	NWiiU,
-	Generic64,
+	Cafe,
+	D3D11,
 	PS4,
 	XBO,
 	Unknown13,
-	WinD3D12,
+	D3D12,
 	Unknown15,
 	NSwitch,
 	Unknown17,
@@ -89,7 +89,7 @@ struct IDSOBJDBProperty {
 
 struct RDBIndex {
 	KTGLHeader header;
-	uint32_t align [[hidden]];
+	KTGLPlatform platform;
 	uint64_t disk_size;
 	uint64_t memory_size;
 	uint32_t property_size;

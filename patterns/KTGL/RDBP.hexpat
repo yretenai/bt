@@ -13,7 +13,7 @@
 
 struct RDBPackage {
 	KTGLHeader header;
-	uint32_t size;
+	uint32_t file_size;
 };
 
 struct RDBPackageData {
@@ -23,4 +23,4 @@ struct RDBPackageData {
 };
 
 RDBPackage root @ 0;
-RDBPackageData index[while($ < std::mem::size())] @ root.header.size;
+RDBPackageData index[while($ < root.file_size)] @ root.size;
