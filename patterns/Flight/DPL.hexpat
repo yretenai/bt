@@ -43,12 +43,12 @@ struct FHMMemoryRange {
 struct FHMHeader {
 	ACEHeader ace;
 	uint32_t mem_range_count;
-	uint32_t memory_size;
-	uint32_t disk_size;
+	uint32_t fhm_size;
+	uint32_t full_memory_size;
 	uint32_t memory_sizes[FHMMemoryType::COUNT];
 	uint32_t alignment[FHMMemoryType::COUNT];
 	uint64_t offset; // read blocks at 0x20000 bytes at a time, aligned to 16 bytes
-	uint32_t aligned_size;
+	uint32_t disk_size;
 	uint32_t group_id; // assets with the same id are loaded together
 	uint32_t resource_id; // crc32($"DPL::[0x{crc32(name):x08}]") OR just crc32(name), crc32/ethernet flavor
 	uint16_t seed; // if not zero, calculate pi and xor the buffer with it. see xor_table.py
@@ -72,7 +72,7 @@ struct CompressHeader {
 struct DPL {
 	DPLHeader dpl;
 	FHMHeader fhm[dpl.count];
-	CompressHeader hdr @ fhm[0].itemHeaderOffset;
+	CompressHeader hdr @ fhm[0].offset;
 };
 
 DPL dpl @ 0;

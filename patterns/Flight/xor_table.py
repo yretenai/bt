@@ -63,7 +63,7 @@ def _arctangent(x: list[int], r: int, m: int, digit: int):
 
 	while True:
 		_div(y, r_squared, digit)
-		
+
 		temp = y[:digit]
 		_div(temp, divisor, digit)
 
@@ -104,7 +104,7 @@ def _create_xor(seed: int) -> bytearray:
 	# _mul(x, 4, digit)
 
 	index = (seed_shr4 + 0x10) >> 3
-	# load two ints 
+	# load two ints
 	return bytearray(struct.pack('>II', PI[index] & 0xFFFFFFFF, PI[index + 1] & 0xFFFFFFFF))
 
 
