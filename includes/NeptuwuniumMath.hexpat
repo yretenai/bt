@@ -66,13 +66,13 @@ using AABBD = AABB<double>;
 struct PString<TLen, TChar> {
 	TLen length;
 	TChar data[length];
-} [[format("format_pstring")]];
+} [[format("format_string")]];
 
 using PString8 = PString<u8, char>;
 using PString16 = PString<u16, char>;
 using PString32 = PString<u32, char>;
 using PString64 = PString<u64, char>;
 
-fn format_pstring(ref auto pstr) {
+fn format_string(ref auto pstr) {
 	return std::format("{}", pstr.data);
 };
