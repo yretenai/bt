@@ -8,12 +8,16 @@
 
 #include "NeptuwuniumInt.hexpat"
 
-
 enum FHMMemoryType : uint16_t {
 	CPU, // asset data
 	GPU, // graphics data
 	VIRT, // zero'd memory
 	COUNT
+};
+
+enum FHMItemType : uint32_t {
+	Normal,
+	Child
 };
 
 struct FHMItemData {
@@ -26,12 +30,20 @@ struct FHMItemData {
 	uint8_t data[size] @ offset;
 };
 
+using FHM;
+
 struct FHMItem {
-	uint64_t pointer;
-	FHMItemData data @ pointer;
+	FHMItemType item_type;
+	uint32_t offset;
+	if (item_type == FHMItemType::Normal) {
+		FHMItemData data @ parent.pos + offset;
+	} else {
+		FHM child @ parent.pos + offset;
+	}
 };
 
 struct FHM {
+	uint32_t pos = $; 
 	uint32_t count;
 	FHMItem items[count];
 };

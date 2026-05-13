@@ -5,6 +5,8 @@
 #pragma author Neptuwunium
 #pragma description Flight Engine DPL Table
 #pragma endian big
+#pragma magic [ 44 50 4C 01 ] @ 0x00
+#pragma magic [ 44 50 4C 00 ] @ 0x00
 
 #include "NeptuwuniumInt.hexpat"
 
