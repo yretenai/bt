@@ -43,7 +43,7 @@ struct FHMItem {
 };
 
 struct FHM {
-	uint32_t pos = $; 
+	uint32_t pos = $;
 	uint32_t count;
 	FHMItem items[count];
 };
