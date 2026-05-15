@@ -5,7 +5,13 @@
 #pragma author Neptuwunium
 #pragma description Flight Engine ACT Text List
 #pragma magic [ 41 43 54 00 ] @ 0x00
-#pragma endian big
+
+bool is_big_endian @ 0xD [[hidden]];
+if (is_big_endian) {
+	std::core::set_endian(std::mem::Endian::Big);
+} else {
+	std::core::set_endian(std::mem::Endian::Little);
+}
 
 #include "Flight.hexpat"
 

@@ -6,18 +6,12 @@
 #pragma description Flight Engine DPL Table
 #pragma magic [ 44 50 4C 01 ] @ 0x00
 #pragma magic [ 44 50 4C 00 ] @ 0x00
+#pragma endian big
 
 #include "NeptuwuniumInt.hexpat"
 
 import std.core;
 import std.mem;
-
-bool is_big_endian @ 3 [[hidden]];
-if (is_big_endian) {
-	std::core::set_endian(std::mem::Endian::Big);
-} else {
-	std::core::set_endian(std::mem::Endian::Little);
-}
 
 enum DPLCompressType : uint8_t {
 	LZ77,

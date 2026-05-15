@@ -5,14 +5,20 @@
 #pragma author Neptuwunium
 #pragma description Flight Engine NuTexture
 #pragma magic [ 4E 54 50 33 ] @ 0x00
-#pragma endian big
+#pragma magic [ 4E 54 57 44 ] @ 0x00
+
+std::core::set_endian(std::mem::Endian::Big);
+u32 magic @ 0 [[hidden]];
+if (magic == 0x4E545744) {
+	std::core::set_endian(std::mem::Endian::Little);
+}
 
 #include "Flight.hexpat"
 
 enum NUTFormat : uint8_t {
-	DXT1 = 0x0,
-	DXT3 = 0x1,
-	DXT5 = 0x2,
+	BC1 = 0x0,
+	BC2 = 0x1,
+	BC3 = 0x2,
 	DXN = 0x3,
 	CTX1 = 0x4,
 	A8 = 0x5,
