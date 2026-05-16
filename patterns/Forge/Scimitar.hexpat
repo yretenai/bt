@@ -10,51 +10,51 @@
 
 struct ScimitarHeader {
 	str magic;
-	uint32_t version;
-	uint64_t fat_offset;
-	uint64_t id;
-	uint32_t flags;
-	uint32_t unknown;
+	u32 version;
+	u64 fat_offset;
+	u64 id;
+	u32 flags;
+	u32 unknown;
 };
 
 struct ScimitarFATFile {
-	int64_t offset;
+	s64 offset;
 	uint64 id;
-	int32_t size;
+	s32 size;
 };
 
 struct ScimitarFATStatus {
-	uint32_t data;
-	uint64_t id;
-	uint32_t attributes;
+	u32 data;
+	u64 id;
+	u32 attributes;
 };
 
 struct ScimitarFATAttribute {
-	int32_t compressed_size;
-	uint64_t hash;
-	uint32_t version;
-	uint32_t type_id;
-	uint64_t attributes;
-	int32_t next;
-	int32_t previous;
-	int32_t parent;
-	int32_t timestamp;
+	s32 compressed_size;
+	u64 hash;
+	u32 version;
+	u32 type_id;
+	u64 attributes;
+	s32 next;
+	s32 previous;
+	s32 parent;
+	s32 timestamp;
 	char name[0x80];
 	ScimitarFATStatus status;
-	int32_t flags;
+	s32 flags;
 };
 
 struct ScimitarFATSpan;
 
 struct ScimitarFATSpan {
-	int32_t file_count;
-	int32_t directory_count;
-	int64_t file_offset;
-	int64_t end_offset;
-	int32_t first_index;
-	int32_t last_index;
-	int64_t attribute_offset;
-	int64_t directory_offset;
+	s32 file_count;
+	s32 directory_count;
+	s64 file_offset;
+	s64 end_offset;
+	s32 first_index;
+	s32 last_index;
+	s64 attribute_offset;
+	s64 directory_offset;
 
 	if (file_offset > -1) {
 		ScimitarFATFile indices[file_count] @ file_offset;
@@ -68,15 +68,15 @@ struct ScimitarFATSpan {
 };
 
 struct ScimitarFAT {
-	int32_t file_count;
-	int32_t directory_count;
-	int64_t max_id;
-	int32_t root_id;
-	int32_t first_free_file;
-	int32_t first_free_dir;
-	int32_t size_of_span;
-	int32_t span_count;
-	int64_t span_offset;
+	s32 file_count;
+	s32 directory_count;
+	s64 max_id;
+	s32 root_id;
+	s32 first_free_file;
+	s32 first_free_dir;
+	s32 size_of_span;
+	s32 span_count;
+	s64 span_offset;
 
 	ScimitarFATSpan spans[span_count] @ span_offset;
 };

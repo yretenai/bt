@@ -10,7 +10,7 @@
 #include "NeptuwuniumInt.hexpat"
 import type.guid;
 
-enum Granny2Compression : uint32_t {
+enum Granny2Compression : u32 {
 	None,
 	OodleLZH,
 	OodleLZF,
@@ -18,7 +18,7 @@ enum Granny2Compression : uint32_t {
 	BitKnitLZF,
 };
 ss
-enum Granny2SectorId : uint32_t {
+enum Granny2SectorId : u32 {
 	Main,
 	RigidVertex,
 	RigidIndex,
@@ -31,51 +31,51 @@ enum Granny2SectorId : uint32_t {
 
 struct Granny2Header {
 	type::GUID magic;
-	uint32_t header_size;
-	uint32_t version;
-	uint32_t reserved[2] [[hidden]];
+	u32 header_size;
+	u32 version;
+	u32 reserved[2] [[hidden]];
 };
 
 struct Granny2Ref {
-	uint32_t section;
-	uint32_t offset;
+	u32 section;
+	u32 offset;
 };
 
 struct Granny2FileInfo {
-	uint32_t version;
-	uint32_t file_size;
-	uint32_t checksum;
-	uint32_t sector_offset;
-	uint32_t sector_count;
+	u32 version;
+	u32 file_size;
+	u32 checksum;
+	u32 sector_offset;
+	u32 sector_count;
 	Granny2Ref type_ref;
 	Granny2Ref root_ref;
-	uint32_t tag;
-	uint32_t extra_tags[4];
-	uint32_t string_checksum;
-	uint32_t reserved[3] [[hidden]];
+	u32 tag;
+	u32 extra_tags[4];
+	u32 string_checksum;
+	u32 reserved[3] [[hidden]];
 };
 
 struct Granny2Sector {
 	Granny2Compression compress_type;
-	uint32_t offset;
-	uint32_t compressed_size;
-	uint32_t size;
-	uint32_t alignment;
-	uint32_t meta1;
-	uint32_t meta2;
-	uint32_t fixup_offset;
-	uint32_t fixup_count;
-	uint32_t marshal_fixup_offset;
-	uint32_t marshal_fixup_count;
+	u32 offset;
+	u32 compressed_size;
+	u32 size;
+	u32 alignment;
+	u32 meta1;
+	u32 meta2;
+	u32 fixup_offset;
+	u32 fixup_count;
+	u32 marshal_fixup_offset;
+	u32 marshal_fixup_count;
 };
 
 struct Granny2Fixup {
-	uint32_t offset;
+	u32 offset;
 	Granny2Ref target;
 };
 
 struct Granny2MarshalFixup {
-	uint32_t count;
+	u32 count;
 	Granny2Fixup fixup;
 };
 

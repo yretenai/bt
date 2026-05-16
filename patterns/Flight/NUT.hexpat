@@ -18,7 +18,7 @@ if (magic == 0x4E545744) {
 #include "Flight.hexpat"
 #include "NeptuwuniumMath.hexpat"
 
-enum NUTFormat : uint8_t {
+enum NUTFormat : u8 {
 	BC1 = 0x0,
 	BC2 = 0x1,
 	BC3 = 0x2,
@@ -68,11 +68,11 @@ enum NUTFormat : uint8_t {
 	A32B32G32R32_FLOAT = 0x2e,
 };
 
-enum NUTFlags : uint32_t {
+enum NUTFlags : u32 {
 	None,
 };
 
-enum NUTFlags2 : uint32_t {
+enum NUTFlags2 : u32 {
 	None,
 	Cubemap = 0x200,
 	CubemapPosX = 0x400,
@@ -84,59 +84,59 @@ enum NUTFlags2 : uint32_t {
 };
 
 struct NUTGlobalIndex {
-	uint32_t index;
-	uint32_t reserved [[hidden]];
+	u32 index;
+	u32 reserved [[hidden]];
 };
 
 struct NUTSurfaceExtraData {
-	uint32_t start = $;
-	uint32_t magic;
-	uint32_t size;
-	uint32_t end = start + size;
+	u32 start = $;
+	u32 magic;
+	u32 size;
+	u32 end = start + size;
 
 	if (magic == 0x47494458) {
 		NUTGlobalIndex gidx;
 	}
 
 	if ($ < end) {
-		uint8_t extra[end - $] [[hidden]];
+		u8 extra[end - $] [[hidden]];
 	}
 };
 
 struct NUTSurfaceExtra {
-	uint32_t start = $;
-	uint32_t magic;
-	uint32_t size;
-	uint32_t header_size;
-	uint32_t reserved;
-	uint32_t end = start + size;
+	u32 start = $;
+	u32 magic;
+	u32 size;
+	u32 header_size;
+	u32 reserved;
+	u32 end = start + size;
 
 	NUTSurfaceExtraData extra[while($ < end)];
 
 	if ($ < end) {
-		uint8_t extra[end - $] [[hidden]];
+		u8 extra[end - $] [[hidden]];
 	}
 };
 
 struct NUTSurface {
-	uint32_t start = $;
-	uint32_t size;
-	uint32_t unknown_size;
-	uint32_t pixel_size;
-	uint16_t header_size;
-	uint16_t unknown_count;
-	uint8_t unknown1;
-	uint8_t mipmap_count;
-	uint8_t unknown2;
+	u32 start = $;
+	u32 size;
+	u32 unknown_size;
+	u32 pixel_size;
+	u16 header_size;
+	u16 unknown_count;
+	u8 unknown1;
+	u8 mipmap_count;
+	u8 unknown2;
 	NUTFormat image_type;
-	uint16_t width;
-	uint16_t height;
+	u16 width;
+	u16 height;
 	NUTFlags flags1;
 	NUTFlags2 flags2;
-	uint32_t pixel_offset;
-	uint32_t reserved1 [[hidden]];
-	uint32_t reserved2 [[hidden]];
-	uint32_t reserved3 [[hidden]];
+	u32 pixel_offset;
+	u32 reserved1 [[hidden]];
+	u32 reserved2 [[hidden]];
+	u32 reserved3 [[hidden]];
 
 	if (header_size - 0x30 > 0x10) {
 		NUTSurfaceExtra extra;
@@ -145,23 +145,23 @@ struct NUTSurface {
 	// version 1: <header> <data> <header> <data>
 	// version 2: <header> <header> <data> <data>
 	if (parent.version == 1) {
-		uint32_t end = start + size;
+		u32 end = start + size;
 
 		if ($ < end) {
-			uint8_t extra[end - $] [[hidden]];
+			u8 extra[end - $] [[hidden]];
 		}
 
-		uint8_t pixel_data[pixel_size];
+		u8 pixel_data[pixel_size];
 	}
 };
 
 struct NUT {
-	uint32_t magic;
-	uint8_t version;
-	uint8_t unknown1; // dies if zero
-	uint16_t surface_count;
-	uint32_t reserved1 [[hidden]];
-	uint32_t reserved2 [[hidden]];
+	u32 magic;
+	u8 version;
+	u8 unknown1; // dies if zero
+	u16 surface_count;
+	u32 reserved1 [[hidden]];
+	u32 reserved2 [[hidden]];
 
 	NUTSurface surfaces[surface_count];
 };

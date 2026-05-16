@@ -28,8 +28,8 @@ struct AnimationFrame {
 };
 
 struct MotionAttribute {
-	uint32_t type;
-	int32_t sound_id;
+	u32 type;
+	s32 sound_id;
 	float frame;
 };
 
@@ -42,7 +42,7 @@ struct Bone {
 
 	Matrix4x4F inverse_matrix;
 	Matrix4x4F local_matrix;
-	int32_t parent_id;
+	s32 parent_id;
 };
 
 struct BoneAnimation {
@@ -55,12 +55,12 @@ struct BoneAnimation {
 };
 
 struct Motion {
-	int32_t bone_count = parent.bone_count;
-	int32_t frame_count = parent.frame_count;
+	s32 bone_count = parent.bone_count;
+	s32 frame_count = parent.frame_count;
 	bool use_global_matrix = false;
 
 	Bone bones[bone_count];
-	int32_t animation_count;
+	s32 animation_count;
 	BoneAnimation animations[bone_count];
 };
 
@@ -74,7 +74,7 @@ struct Force {
 	}
 };
 
-enum GameObjectType : uint16_t {
+enum GameObjectType : u16 {
 	Normal,
 	Skin,
 	Bone,
@@ -91,7 +91,7 @@ struct NormalVertex {
 struct SkinVertex {
 	Vector3F position;
 	Vector2F weight;
-	Vector2<int16_t> index;
+	Vector2<s16> index;
 	Vector3F normal;
 	Vector2F uv;
 };
@@ -111,13 +111,13 @@ struct Material {
 };
 
 struct MaterialBlock {
-	int32_t start_vertex;
-	int32_t primitive_count;
-	uint32_t material_id;
-	uint32_t effect_id;
-	int32_t amount;
-	int32_t used_bone_count;
-	int32_t bone_palette[28];
+	s32 start_vertex;
+	s32 primitive_count;
+	u32 material_id;
+	u32 effect_id;
+	s32 amount;
+	s32 used_bone_count;
+	s32 bone_palette[28];
 };
 
 struct GameObjectInfo {
@@ -125,11 +125,11 @@ struct GameObjectInfo {
 	bool is_transparent [[fixed_size(4)]];
 	bool is_bump [[fixed_size(4)]];
 	bool is_rigid [[fixed_size(4)]];
-	int32_t reserved[7] [[hidden]];
-	int32_t vertex_list_count;
-	int32_t vertex_count;
-	int32_t index_list_count;
-	int32_t index_count;
+	s32 reserved[7] [[hidden]];
+	s32 vertex_list_count;
+	s32 vertex_count;
+	s32 index_list_count;
+	s32 index_count;
 	Vector3F vertex_list[vertex_count];
 
 	if (parent.object_type == GameObjectType::Skin) {
@@ -138,21 +138,21 @@ struct GameObjectInfo {
 		NormalVertex vertices[vertex_count];
 	}
 
-	uint16_t indices[index_count];
-	uint16_t iib[vertex_count];
+	u16 indices[index_count];
+	u16 iib[vertex_count];
 
 	bool has_physique [[fixed_size(4)]];
 	if (has_physique) {
-		uint32_t physique_vertices[vertex_list_count];
+		u32 physique_vertices[vertex_list_count];
 	}
 
 	bool has_material [[fixed_size(4)]];
 	if (has_material) {
-		int32_t material_count;
+		s32 material_count;
 		Material materials[material_count == 0 ? 1 : material_count];
 	}
 
-	int32_t material_block_count;
+	s32 material_block_count;
 	if (material_block_count > 0) {
 		MaterialBlock material_blocks[material_block_count];
 	}
@@ -161,13 +161,13 @@ struct GameObjectInfo {
 struct GameObject {
 	GameObjectType object_type;
 
-	int32_t used_bone_count;
+	s32 used_bone_count;
 	if (used_bone_count > 0) {
-		int32_t used_bones[used_bone_count];
+		s32 used_bones[used_bone_count];
 	}
 
-	int32_t id;
-	int32_t parent_id;
+	s32 id;
+	s32 parent_id;
 	if (parent_id != -1) {
 		GameObjectType parent_object_type;
 	}
@@ -190,7 +190,7 @@ struct CollisionObject {
 };
 
 struct LODGroup {
-	int32_t frame_count = parent.frame_count;
-	int32_t object_count;
+	s32 frame_count = parent.frame_count;
+	s32 object_count;
 	GameObject objects[object_count];
 };

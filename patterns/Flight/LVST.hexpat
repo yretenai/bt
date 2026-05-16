@@ -9,7 +9,7 @@
 
 #include "Flight.hexpat"
 
-enum LVSTColumnType : uint8_t {
+enum LVSTColumnType : u8 {
 	None = 0x00,
 	Byte = 0x10,
 	Buffer = 0x14,
@@ -27,38 +27,38 @@ struct LVSTCell<Type> {
 
 struct LVSTColumn {
 	LVSTColumnType type;
-	uint8_t element_size;
-	uint8_t element_count;
-	uint8_t reserved;
-	uint32_t count;
+	u8 element_size;
+	u8 element_count;
+	u8 reserved;
+	u32 count;
 
 	if (type == LVSTColumnType::Byte || type == LVSTColumnType::Buffer) {
-		LVSTCell<uint8_t> rows[count];
+		LVSTCell<u8> rows[count];
 	} else if (type == LVSTColumnType::Float) {
 		LVSTCell<float> rows[count];
 	} else if (type == LVSTColumnType::Int || type == LVSTColumnType::Date || type == LVSTColumnType::Time) {
-		LVSTCell<uint32_t> rows[count];
+		LVSTCell<u32> rows[count];
 	} else if (type == LVSTColumnType::Hash) {
 		LVSTCell<HashId> rows[count];
 	}
 };
 
 struct LVSTColumnInfo {
-	uint32_t offset;
+	u32 offset;
 
 	LVSTColumn data @ offset;
 };
 
 struct LVST {
-	uint32_t magic;
-	uint32_t version;
-	uint32_t reserved1 [[hidden]];
-	uint32_t reserved2 [[hidden]];
-	uint32_t column_id_size;
+	u32 magic;
+	u32 version;
+	u32 reserved1 [[hidden]];
+	u32 reserved2 [[hidden]];
+	u32 column_id_size;
 	HashId column_ids[column_id_size / 4];
-	uint32_t column_info_size;
+	u32 column_info_size;
 	LVSTColumnInfo column_info[column_info_size / 4];
-	uint32_t column_cell_size;
+	u32 column_cell_size;
 };
 
 LVST lvst @ 0;

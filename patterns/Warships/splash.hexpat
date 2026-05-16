@@ -14,7 +14,7 @@ struct SplashBox {
 };
 
 struct Splash {
-	uint32_t count;
+	u32 count;
 	SplashBox entries[count];
 };
 

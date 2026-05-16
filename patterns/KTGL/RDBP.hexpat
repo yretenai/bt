@@ -13,12 +13,12 @@
 
 struct RDBPackage {
 	KTGLHeader header;
-	uint32_t file_size;
+	u32 file_size;
 };
 
 struct RDBPackageData {
 	RDBIndex inner [[inline]];
-	uint8_t data[inner.disk_size];
+	u8 data[inner.disk_size];
 	std::mem::AlignTo<16>;
 };
 

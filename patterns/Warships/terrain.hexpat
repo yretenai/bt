@@ -9,11 +9,11 @@
 #include "NeptuwuniumInt.hexpat"
 
 struct TerrainHeader {
-	uint32_t magic;
-	uint32_t width;
-	uint32_t height;
-	uint16_t table_size;
-	uint16_t format;
+	u32 magic;
+	u32 width;
+	u32 height;
+	u16 table_size;
+	u16 format;
 	float min;
 	float max;
 	float table[(table_size * table_size) << 1];
@@ -24,21 +24,21 @@ struct TerrainSlice {
 	float curve;
 	float prev = start;
 	float next = curve;
-	int additional = 0;
+	s32 additional = 0;
 	while(prev != next) {
 		float curve;
 		prev = next;
 		next = curve;
 		additional += 1;
 	}
-	int32_t repeat;
-	int32_t total = repeat + additional;
+	s32 repeat;
+	s32 total = repeat + additional;
 };
 
 struct TerrainFile {
 	TerrainHeader header;
-	int32_t total = header.width * header.height;
-	int32_t remain = header.width * header.height;
+	s32 total = header.width * header.height;
+	s32 remain = header.width * header.height;
 	while (remain > 0) {
 		TerrainSlice slice;
 		remain -= slice.total;

@@ -4,13 +4,13 @@
 
 #include "NeptuwuniumInt.hexpat"
 
-using KTID = uint32_t [[format_read("format_ktid")]];
+using KTID = u32 [[format_read("format_ktid")]];
 
 fn format_ktid(ref KTID id) {
 	return std::format("{:08x}", id);
 };
 
-enum KTGLPlatform : uint32_t {
+enum KTGLPlatform : u32 {
 	D3D9,
 	PS3,
 	X360,
@@ -35,12 +35,12 @@ enum KTGLPlatform : uint32_t {
 };
 
 struct KTGLHeader {
-	uint32_t magic;
-	uint32_t version;
-	uint32_t size;
+	u32 magic;
+	u32 version;
+	u32 size;
 };
 
-enum RDBStorageType : uint8_t {
+enum RDBStorageType : u8 {
 	None,
 	Zlib, // 32-bit block disk size + zlib data
 	Lz4, // 32-bit block disk size + lz4 data
@@ -48,7 +48,7 @@ enum RDBStorageType : uint8_t {
 	ChecksumZlib, // 16-bit block disk size + 64-bit checksum + block data
 };
 
-enum RDBLocationType : uint8_t {
+enum RDBLocationType : u8 {
 	Virtual,
 	External,
 	Internal
@@ -63,7 +63,7 @@ bitfield RDBFlags {
 	unknown4 : 2;
 } [[fixed_size(4)]];
 
-enum OBJDBPropertyType : uint32_t {
+enum OBJDBPropertyType : u32 {
 	Bool,
 	Byte,
 	Int16,
@@ -83,22 +83,22 @@ enum OBJDBPropertyType : uint32_t {
 
 struct IDSOBJDBProperty {
 	OBJDBPropertyType property_type;
-	int count;
+	s32 count;
 	KTID property_id;
 };
 
 struct RDBIndex {
 	KTGLHeader header;
 	KTGLPlatform platform;
-	uint64_t disk_size;
-	uint64_t memory_size;
-	uint32_t property_size;
+	u64 disk_size;
+	u64 memory_size;
+	u32 property_size;
 	KTID name_id;
 	KTID type_id;
 	RDBFlags flags;
 	KTID resource_Id;
-	uint32_t property_count;
+	u32 property_count;
 
 	IDSOBJDBProperty properties[property_count];
-	uint8_t property_values[property_size];
+	u8 property_values[property_size];
 };

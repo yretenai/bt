@@ -11,16 +11,16 @@
 #include "NeptuwuniumMath.hexpat"
 
 struct Objective {
-	uint32_t id;
-	uint32_t msg_id;
+	u32 id;
+	u32 msg_id;
 	Color32 color;
-	uint32_t flag;
+	u32 flag;
 };
 
 struct UIF {
-	uint32_t magic;
-	uint32_t version;
-	uint32_t count;
+	u32 magic;
+	u32 version;
+	u32 count;
 	Objective info[count];
 };
 

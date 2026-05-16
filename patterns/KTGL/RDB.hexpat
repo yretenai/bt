@@ -14,7 +14,7 @@
 struct RDBData {
 	KTGLHeader header;
 	KTGLPlatform platform;
-	uint32_t count;
+	u32 count;
 	KTID ndb_id;
 	char external_path[];
 };
@@ -31,40 +31,40 @@ bitfield RDBRDXLinkFlags {
 } [[fixed_size(1)]];
 
 struct RDBRDXLink<TSize> {
-	uint8_t sentinel;
+	u8 sentinel;
 	RDBRDXLinkFlags flags;
 	TSize offset;
 	TSize disk_size;
-	uint16_t rdx_id;
-	uint8_t unknown;
+	u16 rdx_id;
+	u8 unknown;
 };
 
 struct RDBIndexData {
 	RDBIndex inner [[inline]];
 
 	if (inner.disk_size > 0) {
-		uint8_t sentinel [[no_unique_address, hidden]];
+		u8 sentinel [[no_unique_address, hidden]];
 
 		if(sentinel != 1) {
 			char path_info[inner.disk_size];
 		} else {
-			int32_t link_sz = inner.disk_size - 0x5;
+			s32 link_sz = inner.disk_size - 0x5;
 			if (link_sz == 2) {
-				RDBRDXLink<uint8_t> rdx_link;
+				RDBRDXLink<u8> rdx_link;
 			} else if (link_sz == 4) {
-				RDBRDXLink<uint16_t> rdx_link;
+				RDBRDXLink<u16> rdx_link;
 			} else if (link_sz == 6) {
-				RDBRDXLink<uint24_t> rdx_link;
+				RDBRDXLink<u24> rdx_link;
 			} else if (link_sz == 8) {
-				RDBRDXLink<uint32_t> rdx_link;
+				RDBRDXLink<u32> rdx_link;
 			} else if (link_sz == 10) {
-				RDBRDXLink<uint40_t> rdx_link;
+				RDBRDXLink<u40> rdx_link;
 			} else if (link_sz == 12) {
-				RDBRDXLink<uint48_t> rdx_link;
+				RDBRDXLink<u48> rdx_link;
 			} else if (link_sz == 14) {
-				RDBRDXLink<uint58_t> rdx_link;
+				RDBRDXLink<u58> rdx_link;
 			} else if (link_sz == 16) {
-				RDBRDXLink<uint64_t> rdx_link;
+				RDBRDXLink<u64> rdx_link;
 			}
 		}
 	}

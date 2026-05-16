@@ -9,9 +9,9 @@
 #include "KTGL.hexpat"
 
 struct RBXEntry {
-	uint16_t index;
-	uint8_t mount_index;
-	uint8_t locale_index;
+	u16 index;
+	u8 mount_index;
+	u8 locale_index;
 	KTID file_id;
 } [[format_read("format_rbx")]];
 

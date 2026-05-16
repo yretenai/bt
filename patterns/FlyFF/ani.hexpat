@@ -10,12 +10,12 @@
 struct Animation {
 	bool use_global_matrix = true;
 
-	int32_t version;
-	uint32_t id;
+	s32 version;
+	u32 id;
 	float slerp;
-	int32_t reserved[8];
-	int32_t bone_count;
-	int32_t frame_count;
+	s32 reserved[8];
+	s32 bone_count;
+	s32 frame_count;
 
 	bool has_paths [[fixed_size(4)]];
 	if (has_paths) {
@@ -25,7 +25,7 @@ struct Animation {
 	Motion data;
 	MotionAttribute attributes[frame_count];
 
-	int event_count;
+	s32 event_count;
 	if (event_count > 0) {
 		Vector3F events[event_count];
 	}

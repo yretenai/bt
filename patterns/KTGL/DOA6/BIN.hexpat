@@ -9,48 +9,48 @@
 #include "KTGL.hexpat"
 
 struct BINHeader {
-	uint32_t version;
-	uint32_t id_offset;
-	uint32_t count;
-	uint32_t alignment [[hidden]];
-	uint32_t table_offset;
-	uint32_t data_start;
+	u32 version;
+	u32 id_offset;
+	u32 count;
+	u32 alignment [[hidden]];
+	u32 table_offset;
+	u32 data_start;
 };
 
 struct BlockTableHeader {
-	uint32_t count;
-	uint32_t lookup_offset;
-	uint32_t lookup_count;
+	u32 count;
+	u32 lookup_offset;
+	u32 lookup_count;
 } [[fixed_size(16)]];
 
 struct BlockEntry {
 	KTID name_hash;
-	uint32_t index;
+	u32 index;
 };
 
 struct BlockInfo {
-	uint64_t offset;
-	uint32_t memory_size;
-	uint32_t compressed_size; // Zlib Data
-	uint32_t encrypted_size; // AES-256-CBC encrypted data with PKCS7 padding
-	uint8_t hash[16]; // doubles as encryption key, see Annex 1 at the bottom
+	u64 offset;
+	u32 memory_size;
+	u32 compressed_size; // Zlib Data
+	u32 encrypted_size; // AES-256-CBC encrypted data with PKCS7 padding
+	u8 hash[16]; // doubles as encryption key, see Annex 1 at the bottom
 };
 
 struct BlockPtr {
-	uint32_t offset;
+	u32 offset;
 
 	BlockInfo info @ parent.pos + offset;
 
 	// order of priority: encrypted_size > compressed_size > memory_size
 	if (info.encrypted_size > 0) {
 		// compressed if compressed_size is non-zero, otherwise just plain data.
-		uint8_t encrypted_data[info.encrypted_size] @ parent.data_start + info.offset;
+		u8 encrypted_data[info.encrypted_size] @ parent.data_start + info.offset;
 	} else if (info.compressed_size > 0) {
 		// Zlib compressed data
-		uint8_t compressed_data[info.compressed_size] @ parent.data_start + info.offset;
+		u8 compressed_data[info.compressed_size] @ parent.data_start + info.offset;
 	} else if (info.memory_size > 0) {
 		// Plain data
-		uint8_t data[info.memory_size] @ parent.data_start + info.offset;
+		u8 data[info.memory_size] @ parent.data_start + info.offset;
 	}
 };
 

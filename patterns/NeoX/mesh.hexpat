@@ -12,7 +12,7 @@ import std.mem;
 #include "NeptuwuniumMath.hexpat"
 
 struct NxName {
-	uint8_t data[0x20];
+	u8 data[0x20];
 } [[format("format_string")]];
 
 struct NxPoseBone {
@@ -21,8 +21,8 @@ struct NxPoseBone {
 };
 
 struct NxBoneData {
-	uint16_t count;
-	int8_t palette[count];
+	u16 count;
+	s8 palette[count];
 	NxName names[count];
 	bool has_bind_pose;
 	if (has_bind_pose) {
@@ -32,57 +32,57 @@ struct NxBoneData {
 };
 
 struct NxKeyTimes {
-	uint16_t key_count;
+	u16 key_count;
 	float keys[key_count];
 };
 
 struct NxMorphData {
-	uint8_t target;
+	u8 target;
 	NxKeyTimes key_times;
 };
 
 struct NxAnim {
 	NxName name;
-	uint8_t unknown1;
-	uint8_t unknown2;
-	uint8_t unknown3;
-	uint8_t unknown4;
+	u8 unknown1;
+	u8 unknown2;
+	u8 unknown3;
+	u8 unknown4;
 	NxKeyTimes time;
-	uint16_t track_count;
+	u16 track_count;
 
 	// todo
 };
 
 struct NxAnimData {
-	uint32_t count;
+	u32 count;
 	NxAnim animations[count];
 };
 
 struct NxBonePose {
-	uint8_t count;
+	u8 count;
 	NxPoseBone pose[count];
 };
 
 struct NxSubmeshInfo {
-	uint32_t vertex_count;
-	uint32_t face_count;
-	uint8_t uv_count;
-	uint8_t color_count;
+	u32 vertex_count;
+	u32 face_count;
+	u8 uv_count;
+	u8 color_count;
 };
 
 struct NxMeshData {
-	uint32_t size;
+	u32 size;
 	NxSubmeshInfo submeshes[while(std::mem::read_unsigned($, 2) != 0x1)];
-	uint16_t stop [[hidden]];
-	uint32_t vertex_count;
-	uint32_t index_count;
+	u16 stop [[hidden]];
+	u32 vertex_count;
+	u32 index_count;
 	Vector3F xyz[vertex_count];
 	Vector3F nxyz[vertex_count];
-	uint16_t has_tangent;
+	u16 has_tangent;
 	if (has_tangent > 0) {
 		Vector3F txyz[vertex_count];
 	}
-	uint16_t faces[index_count * 3];
+	u16 faces[index_count * 3];
 	Vector2F uv[vertex_count * 2]; // actually sum(submeshes[n].uvCount * submeshes[n].vertex_count)
 	Color32 color[vertex_count]; // actually sum(submeshes[n].colorCount * submeshes[n].vertex_count)
 

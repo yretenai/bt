@@ -11,24 +11,24 @@
 
 struct Tip {
 	HashId message_id;
-	uint32_t category;
-	uint32_t flags;
+	u32 category;
+	u32 flags;
 };
 
 struct RandomTip {
-	uint32_t id;
+	u32 id;
 	HashId message_id[6];
 	float chance;
-	uint32_t direction;
+	u32 direction;
 };
 
 struct TPS {
-	uint32_t magic;
-	uint32_t version;
-	uint32_t tips_count[7];
-	uint32_t random_tip_count;
-	uint32_t reserved1 [[hidden]];
-	uint32_t reserved2 [[hidden]];
+	u32 magic;
+	u32 version;
+	u32 tips_count[7];
+	u32 random_tip_count;
+	u32 reserved1 [[hidden]];
+	u32 reserved2 [[hidden]];
 	Tip category_1[tips_count[0]];
 	Tip category_2[tips_count[1]];
 	Tip category_3[tips_count[2]];

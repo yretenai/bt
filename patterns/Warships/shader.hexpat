@@ -10,30 +10,30 @@ agma author Neptuwunium
 #include "NeptuwuniumInt.hexpat"
 
 struct ShaderPackHeader {
-	uint32_t magic; // ARIE / ARIS
-	uint32_t sys_platform; // WIN\x20
-	uint32_t gfx_platform; // DX11
-	uint32_t version; // 8
-	uint32_t hash;
+	u32 magic; // ARIE / ARIS
+	u32 sys_platform; // WIN\x20
+	u32 gfx_platform; // DX11
+	u32 version; // 8
+	u32 hash;
 };
 
 struct ShaderPackTablePtrs {
-	uint32_t reserved; // 0?
-	int32_t strt;
-	int32_t tbb;
-	int32_t ubb;
-	int32_t stb;
-	int32_t srvs;
-	int32_t uavs;
-	int32_t rtb;
-	int32_t ech;
-	int32_t std;
-	int32_t rstd;
-	int32_t shader_table;
-	int32_t atb;
-	int32_t code;
-	int32_t data;
-	int32_t unknown;
+	u32 reserved; // 0?
+	s32 strt;
+	s32 tbb;
+	s32 ubb;
+	s32 stb;
+	s32 srvs;
+	s32 uavs;
+	s32 rtb;
+	s32 ech;
+	s32 std;
+	s32 rstd;
+	s32 shader_table;
+	s32 atb;
+	s32 code;
+	s32 data;
+	s32 unknown;
 };
 
 struct ShaderPack {
@@ -43,15 +43,15 @@ struct ShaderPack {
 
 struct ShaderBlob {
 	ShaderPackHeader header;
-	uint64_t hash;
-	int32_t param_table_offset;
-	int32_t shader_type;
-	int32_t quality;
-	int32_t shader_offset; // might be nr of params?
-	int32_t shader_length;
-	int32_t unknown_offset2;
-	int32_t unknown_offset3;
-	uint8_t shader[shader_length];
+	u64 hash;
+	s32 param_table_offset;
+	s32 shader_type;
+	s32 quality;
+	s32 shader_offset; // might be nr of params?
+	s32 shader_length;
+	s32 unknown_offset2;
+	s32 unknown_offset3;
+	u8 shader[shader_length];
 };
 
 ShaderPack shader;

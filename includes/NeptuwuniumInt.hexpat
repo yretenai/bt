@@ -28,18 +28,18 @@ using half = type::float16;
 
 // csharp
 
-using byte = int8_t;
-using sbyte = uint8_t;
-using short = int16_t;
-using ushort = uint16_t;
-using Int24 = int24_t;
-using UInt24 = uint24_t;
-using int = int32_t;
-using uint = uint32_t;
-using Int48 = int48_t;
-using UInt48 = uint48_t;
-using long = int64_t;
-using ulong = uint64_t;
+using byte = s8;
+using sbyte = u8;
+using short = s16;
+using ushort = u16;
+using Int24 = s24;
+using UInt24 = u24;
+using int = s32;
+using uint = u32;
+using Int48 = s48;
+using UInt48 = u48;
+using long = s64;
+using ulong = u64;
 using nint = intptr_t;
 using nuint = uintptr_t;
 using Half = half;

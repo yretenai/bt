@@ -11,22 +11,22 @@
 #include "NeptuwuniumMath.hexpat"
 
 struct UITXVariableTexture {
-	uint32_t nut_header_fhm_index;
-	uint32_t nut_fhm_index;
-	uint32_t texture_index;
+	u32 nut_header_fhm_index;
+	u32 nut_fhm_index;
+	u32 texture_index;
 };
 
 struct UITXTexture {
-	Vector4<uint16_t> xywh;
-	uint32_t index;
+	Vector4<u16> xywh;
+	u32 index;
 };
 
 struct UITX {
-	uint32_t magic;
-	uint32_t variable_count;
-	uint32_t variable_offset;
-	uint32_t texture_count;
-	uint32_t texture_offset;
+	u32 magic;
+	u32 variable_count;
+	u32 variable_offset;
+	u32 texture_count;
+	u32 texture_offset;
 
 	UITXVariableTexture variable[variable_count] @ variable_offset;
 	UITXTexture textures[texture_count] @ texture_offset;

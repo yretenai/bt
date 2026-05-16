@@ -13,13 +13,13 @@
 import std.core;
 import std.mem;
 
-enum DPLCompressType : uint8_t {
+enum DPLCompressType : u8 {
 	LZ77,
 	DEFLATE,
 	NONE,
 };
 
-enum FHMMemoryType : int32_t {
+enum FHMMemoryType : s32 {
 	CPU, // asset data
 	GPU, // graphics data
 	VIRT, // zero'd memory
@@ -27,49 +27,49 @@ enum FHMMemoryType : int32_t {
 };
 
 struct ACEHeader {
-	uint8_t magic[3]; // "D", "P", "L" or "F", "H", "M"
+	u8 magic[3]; // "D", "P", "L" or "F", "H", "M"
 	bool is_big_endian;
-	uint32_t version; // 20101010 = 2010-10-10
-	uint32_t date; // yyyymmddxx
+	u32 version; // 20101010 = 2010-10-10
+	u32 date; // yyyymmddxx
 };
 
 struct DPLHeader {
 	ACEHeader ace;
-	uint32_t count;
-	uint32_t size; // size of the header blob
+	u32 count;
+	u32 size; // size of the header blob
 };
 
 struct FHMMemoryRange {
 	FHMMemoryType memory_type;
-	uint32_t size;
-	uint32_t align;
+	u32 size;
+	u32 align;
 };
 
 struct FHMHeader {
 	ACEHeader ace;
-	uint32_t mem_range_count;
-	uint32_t fhm_size;
-	uint32_t full_memory_size;
-	uint32_t memory_sizes[FHMMemoryType::COUNT];
-	uint32_t alignment[FHMMemoryType::COUNT];
-	uint64_t offset; // read blocks at 0x20000 bytes at a time, aligned to 16 bytes
-	uint32_t disk_size;
-	uint32_t group_id; // assets with the same id are loaded together
-	uint32_t resource_id; // crc32($"DPL::[0x{crc32(name):x08}]") OR just crc32(name), crc32/ethernet flavor
-	uint16_t seed; // if not zero, calculate pi and xor the buffer with it. see xor_table.py
+	u32 mem_range_count;
+	u32 fhm_size;
+	u32 full_memory_size;
+	u32 memory_sizes[FHMMemoryType::COUNT];
+	u32 alignment[FHMMemoryType::COUNT];
+	u64 offset; // read blocks at 0x20000 bytes at a time, aligned to 16 bytes
+	u32 disk_size;
+	u32 group_id; // assets with the same id are loaded together
+	u32 resource_id; // crc32($"DPL::[0x{crc32(name):x08}]") OR just crc32(name), crc32/ethernet flavor
+	u16 seed; // if not zero, calculate pi and xor the buffer with it. see xor_table.py
 	bool is_deleted;
-	uint8_t rsvd [[hidden]]; // unallocated stack memory.
+	u8 rsvd [[hidden]]; // unallocated stack memory.
 	FHMMemoryRange mem_ranges[mem_range_count];
 };
 
 struct CompressHeader {
-	uint8_t magic; // "C"
+	u8 magic; // "C"
 	DPLCompressType compression_type;
-	uint16_t index;
-	uint32_t checksum; // crc32(data), crc32/ethernet flavor
-	uint32_t memory_size;
-	uint32_t disk_size;
-	uint8_t data[disk_size];
+	u16 index;
+	u32 checksum; // crc32(data), crc32/ethernet flavor
+	u32 memory_size;
+	u32 disk_size;
+	u8 data[disk_size];
 	// what follows is more CompressHeader buffers
 	// final buffer has random junk bytes after the compressed data to "obfuscate".
 };

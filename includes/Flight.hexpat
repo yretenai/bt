@@ -4,7 +4,7 @@
 
 #include "NeptuwuniumInt.hexpat"
 
-using HashId = uint32_t [[format_read("format_hashid")]];
+using HashId = u32 [[format_read("format_hashid")]];
 
 fn format_hashid(ref HashId id) {
 	return std::format("[0x{:08x}]", id);

@@ -10,15 +10,15 @@
 
 struct BlockAllocatorInfo<Type> {
 	Type type_id;
-	uint32_t size;
+	u32 size;
 };
 
 struct BlockAllocator {
-	uint16_t version;
+	u16 version;
 
 	if (version == 0) {
-		uint16_t count;
-		BlockAllocatorInfo<uint32_t> allocator_info[count];
+		u16 count;
+		BlockAllocatorInfo<u32> allocator_info[count];
 	} else {
 		if (version > 2) {
 			bool has_partial_info;
@@ -26,19 +26,19 @@ struct BlockAllocator {
 			bool has_partial_info = false;
 		}
 
-		uint16_t count;
-		BlockAllocatorInfo<uint16_t> allocator_info[count];
+		u16 count;
+		BlockAllocatorInfo<u16> allocator_info[count];
 
 		if (has_partial_info) {
-			uint16_t partial_count;
-			BlockAllocatorInfo<uint64_t> partial_allocator_info[partial_count];
+			u16 partial_count;
+			BlockAllocatorInfo<u64> partial_allocator_info[partial_count];
 		}
 	}
 };
 
 struct FastFileHeader {
-	uint32_t tag;
-	int32_t size;
+	u32 tag;
+	s32 size;
 	ForgeString name;
 
 	bool has_block_info;

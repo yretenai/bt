@@ -21,7 +21,7 @@ fn format_vector4(ref auto vec) {
 using Vector4H = Vector4<half>;
 using Vector4F = Vector4<float>;
 using Vector4D = Vector4<double>;
-using Color32 = Vector4<uint8_t>;
+using Color32 = Vector4<u8>;
 
 struct Vector3<Type> {
 	Type x, y, z;

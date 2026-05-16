@@ -9,11 +9,11 @@
 #include "NeptuwuniumInt.hexpat"
 
 struct ForgeContainerBlockInfo {
-	int32_t size;
-	int32_t compressed_size;
+	s32 size;
+	s32 compressed_size;
 };
 
-enum ForgeCompressionType : uint8_t {
+enum ForgeCompressionType : u8 {
 	LZOPRO_LZ01X_W03_15,
 	LZO1X_999,
 	LZO2A,
@@ -30,13 +30,13 @@ enum ForgeCompressionType : uint8_t {
 };
 
 struct ForgeContainerHeader {
-	uint8_t tag_version;
-	uint24_t magic;
-	uint32_t container_type;
-	uint16_t version;
+	u8 tag_version;
+	u24 magic;
+	u32 container_type;
+	u16 version;
 	ForgeCompressionType compression_type;
-	uint32_t block_size;
-	int32_t block_count;
+	u32 block_size;
+	s32 block_count;
 
 	if ((block_size & 0x80000000) != 0) {
 		ForgeContainerBlockInfo blocks[block_count];

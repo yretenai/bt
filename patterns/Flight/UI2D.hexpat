@@ -10,7 +10,7 @@
 #include "Flight.hexpat"
 #include "NeptuwuniumMath.hexpat"
 
-enum UI2DLayerType : uint32_t {
+enum UI2DLayerType : u32 {
 	None = 0,
 	Texture = 1,
 	Transition = 2,
@@ -19,14 +19,14 @@ enum UI2DLayerType : uint32_t {
 };
 
 struct UI2DTexture {
-	int32_t count;
-	uint32_t uitx_fhm_index;
-	uint32_t texture_index;
-	Vector4<uint16_t> xywh;
+	s32 count;
+	u32 uitx_fhm_index;
+	u32 texture_index;
+	Vector4<u16> xywh;
 	Vector4F rect;
 	Vector2F scale;
-	uint32_t reserved1 [[hidden]];
-	uint32_t reserved2 [[hidden]];
+	u32 reserved1 [[hidden]];
+	u32 reserved2 [[hidden]];
 };
 
 struct UI2DLayer {
@@ -39,16 +39,16 @@ struct UI2DLayer {
 
 struct UI2DLayerInfo {
 	HashId layer_id;
-	uint32_t offset;
-	uint32_t size;
+	u32 offset;
+	u32 size;
 
 	UI2DLayer layer @ offset;
 };
 
 struct UI2D {
-	uint32_t magic;
+	u32 magic;
 	HashId image_id;
-	uint32_t layer_count;
+	u32 layer_count;
 	UI2DLayerInfo layers[layer_count];
 };
 
