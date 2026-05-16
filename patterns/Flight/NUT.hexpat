@@ -4,19 +4,33 @@
 
 #pragma author Neptuwunium
 #pragma description Flight Engine NuTexture
-#pragma magic [ 4E 54 50 33 ] @ 0x00
-#pragma magic [ 4E 54 57 44 ] @ 0x00
+#pragma magic [ 4E 54 33 44 ] @ 0x00 // NT3D; 3DS
+#pragma magic [ 4E 54 50 33 ] @ 0x00 // NTP3; PS3
+#pragma magic [ 4E 54 58 52 ] @ 0x00 // NTXR; Xbox
+#pragma magic [ 4E 54 57 55 ] @ 0x00 // NTWU; WiiU
+#pragma magic [ 4E 54 57 44 ] @ 0x00 // NTWR; Windows
 
 import std.core;
 
 std::core::set_endian(std::mem::Endian::Big);
-u32 magic @ 0 [[hidden]];
-if (magic == 0x4E545744) {
+NUTPlatform platform @ 5 [[hidden]];
+if (platform == NUTPlatform::Win32 || platform == NUTPlatform::Win64) {
 	std::core::set_endian(std::mem::Endian::Little);
 }
 
 #include "Flight.hexpat"
 #include "NeptuwuniumMath.hexpat"
+
+// time to hunt these i guess.
+enum NUTPlatform : u8 {
+	Win32 = 0x00,
+	CTR = 0x3, // 3ds
+	PS3 = 0x07,
+	Xbox360 = 0x08,
+	Win64 = 0x0C,
+	WiiU = 0x0E,
+	Switch = 0x13,
+};
 
 enum NUTFormat : u8 {
 	BC1 = 0x0,
@@ -68,11 +82,11 @@ enum NUTFormat : u8 {
 	A32B32G32R32_FLOAT = 0x2e,
 };
 
-enum NUTFlags : u32 {
+enum DDSCAPS1 : u32 {
 	None,
 };
 
-enum NUTFlags2 : u32 {
+enum DDSCAPS2 : u32 {
 	None,
 	Cubemap = 0x200,
 	CubemapPosX = 0x400,
@@ -121,18 +135,18 @@ struct NUTSurfaceExtra {
 struct NUTSurface {
 	u32 start = $;
 	u32 size;
-	u32 unknown_size;
+	u32 palette_size;
 	u32 pixel_size;
 	u16 header_size;
-	u16 unknown_count;
-	u8 unknown1;
+	u16 palette_count;
+	u8 surface_type;
 	u8 mipmap_count;
-	u8 unknown2;
+	NUTFormat palette_type;
 	NUTFormat image_type;
 	u16 width;
 	u16 height;
-	NUTFlags flags1;
-	NUTFlags2 flags2;
+	DDSCAPS1 caps1;
+	DDSCAPS2 caps2;
 	u32 pixel_offset;
 	u32 reserved1 [[hidden]];
 	u32 reserved2 [[hidden]];
@@ -158,7 +172,7 @@ struct NUTSurface {
 struct NUT {
 	u32 magic;
 	u8 version;
-	u8 unknown1; // dies if zero
+	NUTPlatform platform;
 	u16 surface_count;
 	u32 reserved1 [[hidden]];
 	u32 reserved2 [[hidden]];
