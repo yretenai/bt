@@ -3,8 +3,10 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine ACT Text List
+#pragma description Flight Engine Ace Combat Text
 #pragma magic [ 41 43 54 00 ] @ 0x00
+
+import std.core;
 
 bool is_big_endian @ 0xD [[hidden]];
 if (is_big_endian) {

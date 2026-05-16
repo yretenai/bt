@@ -8,6 +8,7 @@
 #pragma endian big
 
 #include "Flight.hexpat"
+#include "NeptuwuniumMath.hexpat"
 
 enum UI2DLayerType : uint32_t {
 	None = 0,
@@ -22,8 +23,8 @@ struct UI2DTexture {
 	uint32_t uitx_fhm_index;
 	uint32_t texture_index;
 	Vector4<uint16_t> xywh;
-	Vec4F rect;
-	Vec2 scale;
+	Vector4F rect;
+	Vector2F scale;
 	uint32_t reserved1 [[hidden]];
 	uint32_t reserved2 [[hidden]];
 };

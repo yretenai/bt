@@ -7,6 +7,8 @@
 #pragma magic [ 4E 54 50 33 ] @ 0x00
 #pragma magic [ 4E 54 57 44 ] @ 0x00
 
+import std.core;
+
 std::core::set_endian(std::mem::Endian::Big);
 u32 magic @ 0 [[hidden]];
 if (magic == 0x4E545744) {
@@ -14,6 +16,7 @@ if (magic == 0x4E545744) {
 }
 
 #include "Flight.hexpat"
+#include "NeptuwuniumMath.hexpat"
 
 enum NUTFormat : uint8_t {
 	BC1 = 0x0,

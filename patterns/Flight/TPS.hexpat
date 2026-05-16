@@ -27,8 +27,8 @@ struct TPS {
 	uint32_t version;
 	uint32_t tips_count[7];
 	uint32_t random_tip_count;
-	u32 reserved1 [[hidden]];
-	u32 reserved2 [[hidden]];
+	uint32_t reserved1 [[hidden]];
+	uint32_t reserved2 [[hidden]];
 	Tip category_1[tips_count[0]];
 	Tip category_2[tips_count[1]];
 	Tip category_3[tips_count[2]];
