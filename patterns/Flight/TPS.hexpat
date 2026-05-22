@@ -10,16 +10,16 @@
 #include "Flight.hexpat"
 
 struct Tip {
-	HashId message_id;
+	u32 msg_id;
 	u32 category;
 	u32 flags;
 };
 
 struct RandomTip {
 	u32 id;
-	HashId message_id[6];
+	u32 msg_id[6];
 	float chance;
-	u32 direction;
+	u32 flags;
 };
 
 struct TPS {
