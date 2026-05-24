@@ -4,7 +4,7 @@
 
 #pragma author Neptuwunium
 #pragma description Flight Engine NuTexture
-#pragma magic [ 4E 54 50 33 ] @ 0x00 // NTP3; PS3
+#pragma magic [ 4E 54 50 33 ] @ 0x00
 #pragma endian big
 
 import std.core;
@@ -17,7 +17,7 @@ enum NUTFormat : u8 {
 	BC2 = 0x1,
 	BC3 = 0x2,
 	B5G5R5A1= 0x6,
-	B4G4R4A4 = 0x7, 
+	B4G4R4A4 = 0x7,
 	B5G6R5 = 0x8,
 	A8R8G8B8 = 0xe,
 	B8G8R8A8 = 0x11,
