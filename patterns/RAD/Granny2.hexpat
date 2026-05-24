@@ -7,8 +7,9 @@
 #pragma magic [ B5 95 11 0E 4B B5 A5 6A 50 28 28 EB 04 B3 78 25 ] @ 0
 #pragma magic [ E3 D4 95 31 62 4F DC 20 3A D0 36 CC 89 FF 82 B1 ] @ 0
 
-#include "NeptuwuniumInt.hexpat"
 import type.guid;
+
+#include "Neptuwunium.hexpat"
 
 enum Granny2Compression : u32 {
 	None,

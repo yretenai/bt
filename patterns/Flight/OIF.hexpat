@@ -8,7 +8,6 @@
 #pragma endian big
 
 #include "Flight.hexpat"
-#include "NeptuwuniumMath.hexpat"
 
 struct Objective {
 	u32 msg_id;

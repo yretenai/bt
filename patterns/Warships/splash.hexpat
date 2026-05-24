@@ -5,8 +5,7 @@
 #pragma author Neptuwunium
 #pragma description World of Warships Moo Splash
 
-#include "NeptuwuniumInt.hexpat"
-#include "NeptuwuniumMath.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct SplashBox {
 	PString32 name;

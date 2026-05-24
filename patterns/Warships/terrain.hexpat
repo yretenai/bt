@@ -6,7 +6,7 @@
 #pragma description World of Warships Moo Terrain Heightmap
 #pragma magic [ 74 72 62 00 ] @ 0
 
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct TerrainHeader {
 	u32 magic;

@@ -8,7 +8,7 @@
 #pragma magic [ 44 50 4C 00 ] @ 0x00
 #pragma endian big
 
-#include "NeptuwuniumInt.hexpat"
+#include "Flight.hexpat"
 
 import std.core;
 import std.mem;
@@ -17,20 +17,6 @@ enum DPLCompressType : u8 {
 	LZ77,
 	DEFLATE,
 	NONE,
-};
-
-enum FHMMemoryType : s32 {
-	CPU, // asset data
-	GPU, // graphics data
-	VIRT, // zero'd memory
-	COUNT
-};
-
-struct ACEHeader {
-	u8 magic[3]; // "D", "P", "L" or "F", "H", "M"
-	bool is_big_endian;
-	u32 version; // 20101010 = 2010-10-10
-	u32 date; // yyyymmddxx
 };
 
 struct DPLHeader {
@@ -55,7 +41,7 @@ struct FHMHeader {
 	u64 offset; // read blocks at 0x20000 bytes at a time, aligned to 16 bytes
 	u32 disk_size;
 	u32 group_id; // assets with the same id are loaded together
-	u32 resource_id; // crc32($"DPL::[0x{crc32(name):x08}]") OR just crc32(name), crc32/ethernet flavor
+	HashId resource_id; // crc32($"DPL::[0x{crc32(name):x08}]") OR just crc32(name), crc32/ethernet flavor
 	u16 seed; // if not zero, calculate pi and xor the buffer with it. see xor_table.py
 	bool is_deleted;
 	u8 rsvd [[hidden]]; // unallocated stack memory.

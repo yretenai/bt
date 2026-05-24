@@ -8,7 +8,6 @@
 #pragma endian big
 
 #include "Flight.hexpat"
-#include "NeptuwuniumMath.hexpat"
 
 enum UI2DLayerType : u32 {
 	None = 0,

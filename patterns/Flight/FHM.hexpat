@@ -6,14 +6,7 @@
 #pragma description Flight Engine FHM Table
 #pragma endian big
 
-#include "NeptuwuniumInt.hexpat"
-
-enum FHMMemoryType : u16 {
-	CPU, // asset data
-	GPU, // graphics data
-	VIRT, // zero'd memory
-	COUNT
-};
+#include "Neptuwunium.hexpat"
 
 enum FHMItemType : u32 {
 	Normal,

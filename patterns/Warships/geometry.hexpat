@@ -5,8 +5,7 @@
 #pragma author Neptuwunium
 #pragma description World of Warships Moo Geometry
 
-#include "NeptuwuniumInt.hexpat"
-#include "NeptuwuniumMath.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct GeometryHeader {
 	s32 vertex_buffer_count;

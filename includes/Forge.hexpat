@@ -5,7 +5,7 @@
 #pragma author Neptuwunium
 #pragma description Forge Common Types
 
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct ForgeString {
 	u32 length;

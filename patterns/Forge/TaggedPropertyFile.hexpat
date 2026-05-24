@@ -6,7 +6,6 @@
 #pragma description Forge Tagged Property File
 
 #include "Forge.hexpat"
-#include "NeptuwuniumInt.hexpat"
 
 struct BlockAllocatorInfo<Type> {
 	Type type_id;

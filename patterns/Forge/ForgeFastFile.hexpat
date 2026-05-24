@@ -6,7 +6,7 @@
 #pragma description Forge Fast File
 #pragma magic [ ?? AA FB 57 99 FA 04 01 ] @ 0x00
 
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct ForgeContainerBlockInfo {
 	s32 size;

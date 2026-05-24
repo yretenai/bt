@@ -11,7 +11,6 @@ import std.core;
 import std.mem;
 
 #include "Flight.hexpat"
-#include "NeptuwuniumMath.hexpat"
 
 enum NUTFormat : u8 {
 	BC1 = 0x0,

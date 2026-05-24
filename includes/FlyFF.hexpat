@@ -6,8 +6,7 @@
 #pragma author Neptuwunium
 #pragma description FlyFF Common Types
 
-#include "NeptuwuniumMath.hexpat"
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct ObfuscatedString {
 	u8 length;

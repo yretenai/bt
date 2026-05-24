@@ -8,8 +8,7 @@
 
 import std.mem;
 
-#include "NeptuwuniumInt.hexpat"
-#include "NeptuwuniumMath.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct NxName {
 	u8 data[0x20];

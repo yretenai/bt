@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: EUPL-1.2
 
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 using KTID = u32 [[format_read("format_ktid")]];
 

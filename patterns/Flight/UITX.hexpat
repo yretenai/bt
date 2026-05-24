@@ -8,7 +8,6 @@
 #pragma endian big
 
 #include "Flight.hexpat"
-#include "NeptuwuniumMath.hexpat"
 
 struct UITXVariableTexture {
 	u32 nut_header_fhm_index;

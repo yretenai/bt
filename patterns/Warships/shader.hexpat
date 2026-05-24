@@ -7,7 +7,7 @@ agma author Neptuwunium
 #pragma magic [ 41 52 49 45 ] @ 0
 #pragma magic [ 41 52 49 53 ] @ 0
 
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct ShaderPackHeader {
 	u32 magic; // ARIE / ARIS

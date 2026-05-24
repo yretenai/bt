@@ -17,7 +17,6 @@ if (is_big_endian) {
 }
 
 #include "Flight.hexpat"
-#include "NeptuwuniumMath.hexpat"
 
 struct ACFontLUT {
 	u16 index;

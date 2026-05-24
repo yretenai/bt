@@ -6,7 +6,7 @@
 #pragma description Forge Scimitar File
 #pragma magic [ 73 63 69 6D 69 74 61 72 00 ] @ 0x00
 
-#include "NeptuwuniumInt.hexpat"
+#include "Neptuwunium.hexpat"
 
 struct ScimitarHeader {
 	str magic;
