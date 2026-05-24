@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #include "NeptuwuniumInt.hexpat"
+#include "NeptuwuniumMath.hexpat"
 
 using HashId = u32 [[format_read("format_hashid")]];
 

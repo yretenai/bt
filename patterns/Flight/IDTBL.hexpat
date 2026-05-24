@@ -11,12 +11,12 @@
 
 struct ID {
 	u16 item_id
-	char id1[0x10];
-	char id2[0x10];
+	CFixString8<0x10> platform1;
+	CFixString8<0x10> platform2;
 	if (parent.version == 2013071301) {
-		char sig[0x6];
+		CFixString8<0x10> platform3;
 	}
-	HashId name;
+	HashId item_name;
 	u32 reserved;
 };
 

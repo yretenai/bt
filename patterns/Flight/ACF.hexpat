@@ -47,7 +47,7 @@ struct ACGlyph {
 };
 
 struct ACFont {
-	char name[0x20];
+	CFixString8<0x20> name;
 	u16 asc;
 	u16 desc;
 	u16 width;

@@ -39,7 +39,7 @@ struct ScimitarFATAttribute {
 	s32 previous;
 	s32 parent;
 	s32 timestamp;
-	char name[0x80];
+	CFixString<0x80> name;
 	ScimitarFATStatus status;
 	s32 flags;
 };

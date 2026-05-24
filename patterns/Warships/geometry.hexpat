@@ -43,7 +43,7 @@ struct VertexBuffer {
 	bool is_skinned;
 	bool has_tangent;
 
-	char vertex_format[vertex_format_length] @ pos + 8 + ptr_vertex_format; // usually ENCD data
+	CFixString<vertex_format_length> vertex_format @ pos + 8 + ptr_vertex_format; // usually ENCD data
 	u8 buffer[buffer_length] @ pos + ptr_buffer;
 };
 
@@ -66,7 +66,7 @@ struct BasicBuffer<Type> {
 	s64 ptr_name;
 	s64 ptr_buffer;
 
-	char name[name_length] @ pos + 8 + ptr_name;
+	CFixString<name_length> name @ pos + 8 + ptr_name;
 	Type armor @ pos + ptr_buffer;
 };
 

@@ -63,6 +63,20 @@ using AABBH = AABB<half>;
 using AABBF = AABB<float>;
 using AABBD = AABB<double>;
 
+struct CString<TChar> {
+	TChar data[];
+} [[format("format_string")]];
+
+using CString8 = CString<char>;
+using CString16 = CString<char16>;
+
+struct CFixString<auto Size, TChar> {
+	TChar data[Size];
+} [[format("format_string")]];
+
+using CFixString8<auto Size> = CFixString<Size, char>;
+using CFixString16<auto Size> = CFixString<Size, char16>;
+
 struct PString<TLen, TChar> {
 	TLen length;
 	TChar data[length];

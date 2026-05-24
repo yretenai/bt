@@ -21,9 +21,9 @@ struct ForgeString {
 		u8 data[actual_length]; // encrypted
 	} else {
 		if (is_utf16) {
-			char16 data[actual_length];
+			CFixString16<actual_length> data;
 		} else {
-			char data[actual_length];
+			CFixString8<actual_length> data;
 		}
 	}
 } [[format("format_forge_string")]];

@@ -16,7 +16,7 @@ struct RDBData {
 	KTGLPlatform platform;
 	u32 count;
 	KTID ndb_id;
-	char external_path[];
+	CString8 external_path;
 };
 
 bitfield RDBRDXLinkFlags {
@@ -46,7 +46,7 @@ struct RDBIndexData {
 		u8 sentinel [[no_unique_address, hidden]];
 
 		if(sentinel != 1) {
-			char path_info[inner.disk_size];
+			CFixString8<inner.disk_size> path_info;
 		} else {
 			s32 link_sz = inner.disk_size - 0x5;
 			if (link_sz == 2) {

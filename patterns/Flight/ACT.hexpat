@@ -21,20 +21,20 @@ import std.mem;
 import std.core;
 
 struct ACTLanguage {
-	char lang[2];
+	CFixString8<0x3> lang;
 	u16 index;
 };
 
 struct ACTText {
 	u32 text_offset_table;
-	char16 data[] @ text_offset_table;
+	CString16 data @ text_offset_table;
 };
 
 struct ACTTextInfo {
 	u32 label_offset;
 	ACTText text[parent.parent.language_count];
 
-	char label[] @ label_offset;
+	CString8 label @ label_offset;
 };
 
 struct ACTTextOffset {
@@ -47,7 +47,7 @@ struct ACTHash {
 	u32 label_offset;
 	u32 text_index;
 
-	char label[] @ label_offset;
+	CString8 label @ label_offset;
 };
 
 struct ACT {
