@@ -1,18 +1,18 @@
 SPDX-FileCopyrightText: 2026 Neptuwunium
 SPDX-License-Identifier: CC0-1.0
 
-FHM Count 8: Model (ActorInfo.type == 0x0000 or 0x2000)
+FHM Count 9: Model (ActorInfo.type == 0x0000 or 0x2000)
 	0 : NUD
 	1 : MNT
 	2 : MOP
 	3 : MAT
 	4 : ObjectInfo
-	5 : Unknown
+	5 : Unknown (always missing, probably TWS or COLL)
 	6 : ActorName
 	7 : PackInfo
 	8 : ActorInfo
 
-FHM Count 9: Cinematic Model (ActorInfo.type == 0x0060 or 0x1000)
+FHM Count 10: Cinematic Model (ActorInfo.type == 0x0060 or 0x1000)
 	0..1: NUD
 	2   : MAT
 	3..4: ObjectInfo
@@ -22,7 +22,7 @@ FHM Count 9: Cinematic Model (ActorInfo.type == 0x0060 or 0x1000)
 	8   : PackInfo
 	9   : ActorInfo
 
-FHM Count 14: Map Geometry (ActorInfo.type == 0x0100 or 0x0200)
+FHM Count 15: Map Geometry (ActorInfo.type == 0x0100 or 0x0200)
 	 0..1 : NUD
 	 2..3 : MNT
 	 4..5 : MOP
@@ -33,7 +33,7 @@ FHM Count 14: Map Geometry (ActorInfo.type == 0x0100 or 0x0200)
 	13    : PackInfo
 	14    : ActorInfo
 
-FHM Count 25: Prop 1 (ActorInfo.type == 0x0007)
+FHM Count 26: Prop 1 (ActorInfo.type == 0x0007)
 	 0..11: NUD
 	11..19: ObjectInfo
 	20    : MNT
@@ -43,7 +43,7 @@ FHM Count 25: Prop 1 (ActorInfo.type == 0x0007)
 	24    : PackInfo
 	25    : ActorInfo
 
-FHM Count 28: Plane 1 (ActorInfo.type == 0x000a)
+FHM Count 29: Plane 1 (ActorInfo.type == 0x000a)
 	 0..7 : NUD
 	 8..15: MNT
 	16..23: ObjectInfo
@@ -53,19 +53,19 @@ FHM Count 28: Plane 1 (ActorInfo.type == 0x000a)
 	27    : PackInfo
 	28    : ActorInfo
 
-FHM Count 48: Map Geometry 2 (ActorInfo.type == 0x0005 or 0x0009)
+FHM Count 49: Map Geometry 2 (ActorInfo.type == 0x0005 or 0x0009)
 	 0..15: NUD
 	16..23: MAT
 	24..39: ObjectInfo
 	40..41: MNT
 	42..43: MOP
 	44    : COLL
-	45    : Unknown
+	45    : TWS
 	46    : ActorName
 	47    : PackInfo
 	48    : ActorInfo
 
-FHM Count 54: Plane 2 (ActorInfo.type == 0x0002)
+FHM Count 55: Plane 2 (ActorInfo.type == 0x0002)
 	 0..10: NUD
 	11..21: MNT
 	22..32: MOP
@@ -76,7 +76,7 @@ FHM Count 54: Plane 2 (ActorInfo.type == 0x0002)
 	53    : PackInfo
 	54    : ActorInfo
 
-FHM Count 57: Prop 2 (ActorInfo.type == 0x0003)
+FHM Count 58: Prop 2 (ActorInfo.type == 0x0003)
 	 0..19: NUD
 	20..29: MAT
 	30..49: ObjectInfo
