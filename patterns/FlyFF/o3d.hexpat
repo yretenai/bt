@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description FlyFF WindEngine Object3D
+#pragma description FlyFF O3D Object3D
 
 #include "FlyFF.hexpat"
 

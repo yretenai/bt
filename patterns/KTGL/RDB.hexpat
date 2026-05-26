@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description KTGL Resource Database File
+#pragma description KTGL RDB Resource Database
 #pragma magic [ 5F 44 52 4B 30 30 30 30 ] @ 0x00
 
 #pragma array_limit 0xffffffff

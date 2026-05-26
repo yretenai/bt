@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description World of Warships Moo Terrain Heightmap
+#pragma description WoWs Terrain
 #pragma magic [ 74 72 62 00 ] @ 0
 
 #include "Neptuwunium.hexpat"

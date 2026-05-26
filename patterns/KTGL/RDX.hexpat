@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description KTGL Resource Link File
+#pragma description KTGL RDX Resource Link
 #pragma magic [ 00 00 FF FF ?? ?? ?? ?? 01 00 FF FF ] @ 0x00
 
 #include "KTGL.hexpat"

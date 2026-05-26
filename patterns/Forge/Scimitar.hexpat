@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Forge Scimitar File
+#pragma description Forge Scimitar
 #pragma magic [ 73 63 69 6D 69 74 61 72 00 ] @ 0x00
 
 #include "Neptuwunium.hexpat"

@@ -4,7 +4,7 @@
 
 #pragma once
 #pragma author Neptuwunium
-#pragma description Neptuwunium Integer Types
+#pragma description Neptuwunium Integer
 
 import type.float16;
 

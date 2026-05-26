@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Forge Common Types
+#pragma description Forge Types
 
 #include "Neptuwunium.hexpat"
 

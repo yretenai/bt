@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description World of Warships Moo Splash
+#pragma description WoWs Splash
 
 #include "Neptuwunium.hexpat"
 

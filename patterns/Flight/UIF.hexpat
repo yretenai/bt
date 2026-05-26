@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Objectives File
+#pragma description ACI UIF Objectives
 #pragma magic [ 55 49 46 00 ] @ 0x00
 #pragma endian big
 
@@ -16,11 +16,11 @@ struct Objective {
 	u32 flags;
 };
 
-struct OIF {
+struct UIF {
 	u32 magic;
 	u32 version;
 	u32 count;
 	Objective info[count];
 };
 
-OIF oif @ 0;
+UIF uif @ 0;

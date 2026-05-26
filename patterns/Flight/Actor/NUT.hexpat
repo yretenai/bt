@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine NuTexture
+#pragma description ACI NuTexture
 #pragma magic [ 4E 54 50 33 ] @ 0x00
 #pragma endian big
 

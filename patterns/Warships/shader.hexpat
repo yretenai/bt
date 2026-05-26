@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 agma author Neptuwunium
-#pragma description World of Warships Moo Shader
+#pragma description WoWs Shader
 #pragma magic [ 41 52 49 45 ] @ 0
 #pragma magic [ 41 52 49 53 ] @ 0
 

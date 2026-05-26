@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Dead or Alive 6 BIN file
+#pragma description DOA6 BIN file
 #pragma array_limit 0xffffffff
 
 #include "KTGL.hexpat"

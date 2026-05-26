@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Forge Fast File
+#pragma description Forge FastFile
 #pragma magic [ ?? AA FB 57 99 FA 04 01 ] @ 0x00
 
 #include "Neptuwunium.hexpat"

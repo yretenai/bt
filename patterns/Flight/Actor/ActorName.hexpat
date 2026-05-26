@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Actor Name
+#pragma description ACI Actor Name
 #pragma endian big
 
 #include "Flight.hexpat"

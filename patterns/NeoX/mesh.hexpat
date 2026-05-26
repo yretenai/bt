@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description NeoX Mesh File
+#pragma description NeoX Mesh
 #pragma magic [ 34 80 C8 BB ] @ 0x00
 
 import std.mem;

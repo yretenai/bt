@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Material
+#pragma description ACI MATE Material
 #pragma magic [ 4D 41 54 45 ] @ 0x00
 #pragma endian big
 

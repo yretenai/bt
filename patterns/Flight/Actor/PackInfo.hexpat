@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Pack Info
+#pragma description ACI Pack Info
 #pragma endian big
 
 struct ACEPackInfo {

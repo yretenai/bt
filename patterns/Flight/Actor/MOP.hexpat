@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Motion Pack
+#pragma description ACI Motion Pack
 #pragma magic [ 4D 4F 50 32 ] @ 0x00
 #pragma endian big
 

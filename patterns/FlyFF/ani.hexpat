@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description FlyFF WindEngine Animations
+#pragma description FlyFF ANI Animations
 
 #include "FlyFF.hexpat"
 

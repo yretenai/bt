@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Tips File
+#pragma description ACI TPS Tips
 #pragma magic [ 54 50 53 00 ] @ 0x00
 #pragma endian big
 

@@ -4,7 +4,7 @@
 
 #pragma once
 #pragma author Neptuwunium
-#pragma description Neptuwunium String Types
+#pragma description Neptuwunium String
 
 import std.string;
 

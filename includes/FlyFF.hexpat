@@ -4,7 +4,7 @@
 
 #pragma once
 #pragma author Neptuwunium
-#pragma description FlyFF Common Types
+#pragma description FlyFF Types
 
 #include "Neptuwunium.hexpat"
 

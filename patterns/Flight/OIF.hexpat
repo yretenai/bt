@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Object Information File
+#pragma description ACI OIF Object Info
 #pragma magic [ 4F 49 46 00 ] @ 0x00
 #pragma endian big
 

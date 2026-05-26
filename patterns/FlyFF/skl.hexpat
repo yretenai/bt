@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description FlyFF WindEngine Skeletons
+#pragma description FlyFF SKL Skeletons
 
 #include "FlyFF.hexpat"
 

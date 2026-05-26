@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine FHM Table
+#pragma description ACI FHM Asset
 #pragma endian big
 
 #include "Neptuwunium.hexpat"

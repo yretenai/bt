@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Ace Combat Font
+#pragma description ACI Font
 #pragma magic [ 41 43 46 00 ] @ 0x00
 #pragma endian big
 

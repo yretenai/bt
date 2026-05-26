@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description RAD Granny2 Model
+#pragma description RAD Granny2
 #pragma magic [ B5 95 11 0E 4B B5 A5 6A 50 28 28 EB 04 B3 78 25 ] @ 0
 #pragma magic [ E3 D4 95 31 62 4F DC 20 3A D0 36 CC 89 FF 82 B1 ] @ 0
 

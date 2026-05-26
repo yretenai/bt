@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Store Table File
+#pragma description ACI Store Table
 #pragma magic [ 99 83 FD 77 ] @ 0x00
 #pragma endian little
 

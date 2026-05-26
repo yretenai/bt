@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine Model Node Tree
+#pragma description ACI MNT Model Node Tree
 #pragma magic [ 4D 4E 54 00 ] @ 0x00
 #pragma endian big
 

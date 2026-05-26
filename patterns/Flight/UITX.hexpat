@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description Flight Engine 2D UI Texture
+#pragma description ACI UITX Texture
 #pragma magic [ 55 49 54 58 ] @ 0x00
 #pragma endian big
 
