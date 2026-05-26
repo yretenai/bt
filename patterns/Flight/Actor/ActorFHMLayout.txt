@@ -2,17 +2,17 @@ SPDX-FileCopyrightText: 2026 Neptuwunium
 SPDX-License-Identifier: CC0-1.0
 
 FHM Count 9: Model (ActorInfo.type == 0x0000 or 0x2000)
-	0 : NUD
-	1 : MNT
-	2 : MOP
-	3 : MAT
-	4 : ObjectInfo
-	5 : Unknown (always missing, probably TWS or COLL)
-	6 : ActorName
-	7 : PackInfo
-	8 : ActorInfo
+	0: NUD
+	1: MNT
+	2: MOP
+	3: MAT
+	4: ObjectInfo
+	5: Unknown (always missing, probably TWS or COLL)
+	6: ActorName
+	7: PackInfo
+	8: ActorInfo
 
-FHM Count 10: Cinematic Model (ActorInfo.type == 0x0060 or 0x1000)
+FHM Count 10: Cinematic Model (ActorInfo.type == 0x0060)
 	0..1: NUD
 	2   : MAT
 	3..4: ObjectInfo
@@ -21,6 +21,18 @@ FHM Count 10: Cinematic Model (ActorInfo.type == 0x0060 or 0x1000)
 	7   : ActorName
 	8   : PackInfo
 	9   : ActorInfo
+
+FHM Count 10: Cinematic Model 2 (ActorInfo.type == 0x1000)
+	0: NUD
+	1: MNT
+	2: MOP
+	3: MAT
+	4: ObjectInfo
+	5: Unknown (always missing, probably COLL)
+	6: Unknown (always missing, probably TWS)
+	7: ActorName
+	8: PackInfo
+	9: ActorInfo
 
 FHM Count 15: Map Geometry (ActorInfo.type == 0x0100 or 0x0200)
 	 0..1 : NUD
@@ -35,7 +47,7 @@ FHM Count 15: Map Geometry (ActorInfo.type == 0x0100 or 0x0200)
 
 FHM Count 26: Prop 1 (ActorInfo.type == 0x0007)
 	 0..11: NUD
-	11..19: ObjectInfo
+	12..19: ObjectInfo
 	20    : MNT
 	21    : MOP
 	22    : COLL
