@@ -57,9 +57,9 @@ FHM Count 26: Prop 1 (ActorInfo.type == 0x0007)
 
 FHM Count 29: Plane 1 (ActorInfo.type == 0x000a)
 	 0..7 : NUD
-	 8..15: MNT
+	 8..15: MAT
 	16..23: ObjectInfo
-	24    : MAT
+	24    : MNT
 	25    : MOP
 	26    : ActorName
 	27    : PackInfo

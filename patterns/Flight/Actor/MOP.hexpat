@@ -118,7 +118,7 @@ struct KFM {
 	u16 motion_count;
 	u16 frame_info_count;
 	u32 node_offset;
-	u32 frame_id_offset;
+	u32 frame_start_offset;
 	u32 frame_info_offset;
 	HashId hash;
 	u32 name_offset;
@@ -130,9 +130,8 @@ struct KFM {
 
 	KFMNode const_nodes[const_count] @ start + node_offset;
 	KFMNode motion_nodes[motion_count] @ start + node_offset + ((node_size * const_count) << 4);
-	u16 frame_ids[frame_info_count] @ start + frame_id_offset;
-	std::assert(frame_info_count == 2, "frame count is not 2");
-	KFMFramePtr frames[frame_info_count] @ start + frame_info_offset; // there is always 2, one for const and one for motion 
+	u16 frame_start[frame_info_count] @ start + frame_start_offset;
+	KFMFramePtr frames[frame_info_count] @ start + frame_info_offset; // 1st one is for const, others are for motion
 	CString8 name @ start + name_offset;
 };
 
