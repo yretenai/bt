@@ -18,14 +18,14 @@ enum UI2DLayerType : u32 {
 };
 
 struct UI2DTexture {
-	s32 count;
+	u32 unknown_index;
 	u32 uitx_fhm_index;
 	u32 texture_index;
-	Vector4<u16> xywh;
-	Vector4F rect;
+	Vector4<u16> crop_rect;
+	Vector4F result_rect;
 	Vector2F scale;
 	u32 reserved1 [[hidden]];
-	u32 reserved2 [[hidden]];
+	u32 unknown_id;
 };
 
 struct UI2DLayer {

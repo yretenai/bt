@@ -10,9 +10,9 @@
 #include "Flight.hexpat"
 
 struct UITXVariableTexture {
-	u32 nut_header_fhm_index;
-	u32 nut_fhm_index;
-	u32 texture_index;
+	u32 nut_header_index;
+	u32 nut_index;
+	u32 surface_index;
 };
 
 struct UITXTexture {
