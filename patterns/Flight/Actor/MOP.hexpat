@@ -17,9 +17,9 @@ enum KFMChannel : u8 {
 	VEC3F = 0x2, // size 4 (3 elements)
 	VEC4F = 0x3, // size 4 (4 elements)
 	SCALE32 = 0x4, // size 4 (3 elements)
-	TRANSLATION32 = 0x5,  // size 4 (3 elements)
+	TRANSLATION32 = 0x5, // size 4 (3 elements)
 	ROTATION_RADIANS = 0x6, // size 4 (4 elements)
-	ROTATION32W = 0x7,  // size 4 (4 elements)
+	ROTATION32W = 0x7, // size 4 (4 elements)
 	ROTATION32X = 0x8, // size 4 (3 elements, order is determined with compress_bit_index)
 	ROTATION20 = 0x9, // size 8 (1 element)
 	ROTATION15 = 0xa, // size 6 (1 element)
@@ -45,12 +45,12 @@ ROTATION15:
 	assuming value = uint8[6]
 	order = value[5] & 3
 
-	x, y, z = todo: math 
+	x, y, z = todo: math
 
 ROTATION10:
 	assuming value = uint32
 	order = value & 3
-	
+
 	x, y, z = todo: math
 
 all:
@@ -68,10 +68,10 @@ all:
 
 struct KFMFrameNode {
 	u16 frame_count;
-	u16 compress_bit_index; // 2 bits at index, multiply by 2 to get bit index. only for ROTATION32X. 
+	u16 compress_bit_index; // 2 bits at index, multiply by 2 to get bit index. only for ROTATION32X.
 	u16 frame_id_index;
 	u16 value_index;
-	
+
 	u16 frame_ids[frame_count] @ parent.start + parent.frame_offset + frame_id_index * 2;
 };
 

@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 #pragma author Neptuwunium
-#pragma description ACI !!Custom!! MAGE Actor 
+#pragma description ACI !!Custom!! MAGE Actor
 #pragma magic [ 4D 41 47 45 ] @ 0x00
 
 #include "Neptuwunium.hexpat"
