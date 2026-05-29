@@ -51,7 +51,7 @@ struct Mesh {
 
 	u8 vertex_buffer_type;
 	if(vertex_buffer_type == 0) {
-		Vector3F vertex_position_buffer[vertex_count]; // ? x, y, z, zero. scaled to min/max maybe?
+		Vector3F vertex_position_buffer[vertex_count];
 		u32 vertex_normal_buffer[vertex_count]; // R10G10B10A2 probably, values never go over 0x3fffffff
 		u32 vertex_tangent_buffer[vertex_count]; // R10G10B10A2 probably
 	} else if(vertex_buffer_type == 1) {
