@@ -44,6 +44,7 @@ struct BoneInfo {
 
 
 struct Skeleton {
+	u32 version;
 	u16 boneCount;
 	RelPtr<BoneData> boneData;
 	u32 headerEnd = $ + 4;

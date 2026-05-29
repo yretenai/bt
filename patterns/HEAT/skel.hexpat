@@ -9,9 +9,4 @@ import std.sys;
 
 #include "HEAT.hexpat"
 
-struct SkeletonVersion {
-	u32 version;
-	Skeleton skeleton [[inline]];
-};
-
-SkeletonVersion skel @ 0;
+Skeleton skel @ 0;

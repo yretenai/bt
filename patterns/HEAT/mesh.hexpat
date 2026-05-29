@@ -45,6 +45,7 @@ struct Mesh {
 	std::assert(unknown == 0, "unknown is not 0");
 
 	u32 submesh_count;
+	std::assert(submesh_count <= 0xff, "submesh count is > 255");
 	Submesh submeshes[submesh_count];
 
 	u32 vertex_count;
@@ -56,23 +57,25 @@ struct Mesh {
 		u32 vertex_tangent_buffer[vertex_count]; // R10G10B10A2 probably
 	} else if(vertex_buffer_type == 1) {
 		Vector4H vertex_position_buffer[vertex_count]; // ? x, y, z, zero. scaled to min/max maybe?
-		u32 vertex_normal_buffer[vertex_count]; // R10G10B10A2 probably, values never go over 0x3fffffff
+		u32 vertex_normal_buffer[vertex_count]; // R10G10B10A2 probably
 		u32 vertex_tangent_buffer[vertex_count]; // R10G10B10A2 probably
 	} else {
 		std::assert(false, "vertex_buffer_type is not 0 or 1");
 	}
 
-	u8 num_uvs; // num uvs?
-	u8 unknown3_1;
-	u8 unknown3_2;
-	u8 unknown3_3;
-	std::assert(unknown3_1 == 0, "unknown3_1 is not 0");
-	std::assert(unknown3_2 == 0, "unknown3_2 is not 0");
-	std::assert(unknown3_3 == 0, "unknown3_3 is not 0");
+	u32 num_uvs;
+	std::assert(num_uvs <= 3, "uv count is > 3");
 	UVBuffer uvs[num_uvs];
 
-	u8 unknown4; // 0 <-- pretty sure this is buffer type
-	std::assert(unknown4 == 0, "unknown4 is not 0");
+	u8 color_buffer_type;
+	if(color_buffer_type > 0) {
+		if(color_buffer_type == 1) {
+			u32 color_buffer[vertex_count];
+		} else {
+			std::assert(false, "color_buffer_type is not 0 or 1");
+		}
+	}
+
 	u32 index_buffer_size;
 	if (vertex_count > 0xffff) {
 		u32 index_buffer[index_buffer_size];
@@ -81,19 +84,19 @@ struct Mesh {
 	}
 
 	u8 skin_type;
-	if (skin_type == 1) {
-		u32 weight_count;
-		u32 weight_buffer[weight_count];
-		u32 index_buffer[vertex_count];
-	} else if(skin_type == 2) {
-		u16 skin_buffer[vertex_count]; // 1 bone per vertex?
-	} else {
-		std::assert(false, "skin_type is not 1 or 2");
-	}
+	if (skin_type > 0) {
+		if (skin_type == 1) {
+			u32 weight_count;
+			u32 weight_buffer[weight_count];
+			u32 index_buffer[vertex_count];
+		} else if(skin_type == 2) {
+			u16 skin_buffer[vertex_count]; // "hard" skinning
+		} else {
+			std::assert(false, "skin_type is not 0, 1 or 2");
+		}
 
-	u32 skeleton_type; // 4 <-- pretty sure this is buffer type
-	std::assert(skeleton_type == 4, "skeleton_type is not 4");
-	Skeleton skeleton;
+		Skeleton skeleton;
+	}
 };
 
 Mesh mesh @ 0;
