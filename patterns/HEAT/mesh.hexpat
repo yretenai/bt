@@ -5,6 +5,7 @@
 #pragma author Neptuwunium
 #pragma description HEAT Mesh
 #pragma array_limit 0x1fffffff
+#pragma pattern_limit 0x1fffffff
 
 import std.sys;
 
@@ -31,6 +32,16 @@ struct UVBuffer {
 	} else {
 		std::assert(false, "uv_type is not 0 or 1");
 	}
+};
+
+bitfield BoneIndirection {
+	index: 24;
+	count: 8;
+};
+
+struct BoneWeight {
+	half weight;
+	u16 index;
 };
 
 // the lack of alignment in this file is making me very upset
@@ -86,8 +97,8 @@ struct Mesh {
 	if (skin_type > 0) {
 		if (skin_type == 1) { // "soft" skinning
 			u32 weight_count;
-			u32 weight_buffer[weight_count];
-			u32 skin_buffer[vertex_count]; // bones indirection
+			BoneWeight weight_buffer[weight_count];
+			BoneIndirection skin_buffer[vertex_count]; // bones indirection
 		} else if(skin_type == 2) {
 			u16 skin_buffer[vertex_count]; // "hard" skinning
 		} else {
