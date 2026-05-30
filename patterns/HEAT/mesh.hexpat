@@ -53,15 +53,14 @@ struct Mesh {
 	u8 vertex_buffer_type;
 	if(vertex_buffer_type == 0) {
 		Vector3F vertex_position_buffer[vertex_count];
-		u32 vertex_normal_buffer[vertex_count]; // R10G10B10A2 probably, values never go over 0x3fffffff
-		u32 vertex_tangent_buffer[vertex_count]; // R10G10B10A2 probably
 	} else if(vertex_buffer_type == 1) {
 		Vector4H vertex_position_buffer[vertex_count]; // ? x, y, z, zero. scaled to min/max maybe?
-		u32 vertex_normal_buffer[vertex_count]; // R10G10B10A2 probably
-		u32 vertex_tangent_buffer[vertex_count]; // R10G10B10A2 probably
 	} else {
 		std::assert(false, "vertex_buffer_type is not 0 or 1");
 	}
+
+	u32 vertex_tangent_buffer[vertex_count]; // R10G10B10A2 with A2 being the sign for binormal
+	u32 vertex_normal_buffer[vertex_count]; // R10G10B10X2
 
 	u32 num_uvs;
 	std::assert(num_uvs <= 3, "uv count is > 3");
@@ -85,10 +84,10 @@ struct Mesh {
 
 	u8 skin_type;
 	if (skin_type > 0) {
-		if (skin_type == 1) {
+		if (skin_type == 1) { // "soft" skinning
 			u32 weight_count;
 			u32 weight_buffer[weight_count];
-			u32 index_buffer[vertex_count];
+			u32 skin_buffer[vertex_count]; // bones indirection
 		} else if(skin_type == 2) {
 			u16 skin_buffer[vertex_count]; // "hard" skinning
 		} else {

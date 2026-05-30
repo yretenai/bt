@@ -48,6 +48,6 @@ struct Skeleton {
 	u16 boneCount;
 	RelPtr<BoneData> boneData;
 	u32 headerEnd = $ + 4;
-	BonePtr<BoneInfo> rootBone;
 	BonePtr<BoneInfo> bones[boneCount];
+	BonePtr<BoneInfo> rootBone;
 };
