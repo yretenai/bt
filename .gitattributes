@@ -3,3 +3,4 @@
 # SPDX-License-Identifier: EUPL-1.2
 
 *.hexpat text eol=lf diff=rust linguist-language=Rust
+* -linguist-detectable
