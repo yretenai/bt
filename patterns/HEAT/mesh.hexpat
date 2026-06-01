@@ -14,12 +14,10 @@ import std.sys;
 struct Submesh {
 	PString32 name;
 
-	u32 unknown; // probably flags
+	u32 flags;
 	u32 first_index;
 	u32 vertex_count;
 	u32 face_count;
-
-	std::assert(unknown == 0, "unknown is not 0");
 };
 
 struct UVBuffer {
@@ -52,8 +50,7 @@ struct Mesh {
 	Vector3F max;
 	Vector3F scale;
 	float bias;
-	u32 unknown;
-	std::assert(unknown == 0, "unknown is not 0");
+	u32 flags;
 
 	u32 submesh_count;
 	std::assert(submesh_count <= 0xff, "submesh count is > 255");
