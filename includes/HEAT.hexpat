@@ -42,7 +42,6 @@ struct BoneInfo {
 	u32 parentOffset; // doesn't exist on the last one.
 } [[inline]];
 
-
 struct Skeleton {
 	u32 version;
 	u16 boneCount;

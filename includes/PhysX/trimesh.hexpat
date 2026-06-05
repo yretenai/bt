@@ -5,7 +5,6 @@
 #include "PhysX.hexpat"
 #include "Neptuwunium.hexpat"
 
-
 enum BVHVersion : u32 {
 	BVH33 = 0,
 	BVH34 = 1
