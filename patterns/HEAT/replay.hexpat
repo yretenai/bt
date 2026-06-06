@@ -73,21 +73,21 @@ struct ReplayHeader {
 
 enum ReplayEventType : u8 {
 	None,
-	PlayerId1,
-	PlayerId2,
-	Payload1,
-	Payload2,
-	Payload3,
-	LoadPrefab,
-	Payload4,
-	Payload5,
-	InputEvent,
-	CustomEvent,
+	PlayerConnected,
+	PlayerDisconnceted,
+	EditorPacket,
+	ClientUIPacket,
+	ClientNoUIPacket,
+	Prefab,
+	ServerUIPacket,
+	ServerNoUIPacket,
+	Input,
+	Custom,
 };
 
-using ReplayPlayerId = u8;
+using ReplayPlayerEvent = u8;
 
-struct ReplayLoadPrefab {
+struct ReplayPrefabEvent {
 	ReplayString prefab_path;
 	u32 child_index;
 	ReplayInt size;
@@ -108,7 +108,7 @@ struct ReplayCustomEvent {
 	u8 data[size.value];
 };
 
-struct ReplayPayloadPacket {
+struct ReplayPacketPayload {
 	ReplayInt size;
 
 	std::assert(size.value <= 0x4000, "packet too big");
@@ -116,31 +116,87 @@ struct ReplayPayloadPacket {
 	u8 data[size.value];
 };
 
-struct ReplayPayload {
-	u64 payload_id;
+struct ReplayPacketEvent {
+	u64 packet_id;
 	ReplayInt payload_count;
-	ReplayPayloadPacket packets[payload_count.value];
+	ReplayPacketPayload packets[payload_count.value];
+};
+
+enum PacketInputType : u8 {
+	None,
+	Keyboard,
+	MouseButton,
+	MouseMove,
+	MouseWheel,
+	TextInput,
+};
+
+bitfield PacketKeyboardFlags {
+	is_pressed: 1;
+	is_repeat: 1;
+	unknown: 6;
+} [[fixed_size(1)]];
+
+enum MouseButtonType : u8 {
+	None,
+	Left,
+	Middle,
+	Right,
+};
+
+bitfield PacketButtonInfo {
+	MouseButtonType id: 7;
+	is_down: 1;
+} [[fixed_size(1)]];
+
+struct PacketInputFloat {
+	u16 raw_value;
+	float value = float(raw_value) / float(0x8000) [[export]];
+};
+
+struct PacketInput {
+	PacketInputType input_type;
+	u16 modifier_keys;
+	
+	if(input_type == PacketInputType::Keyboard) {
+		u16 key_id;
+		u8 key_mod;
+		PacketKeyboardFlags flags;
+	} else if(input_type == PacketInputType::MouseButton) {
+		Vector2<PacketInputFloat> pos;
+		PacketButtonInfo button_id;
+		u8 num_clicks;
+	} else if(input_type == PacketInputType::MouseMove) {
+		Vector2<PacketInputFloat> pos;
+		Vector2<PacketInputFloat> delta;
+	} else if(input_type == PacketInputType::MouseWheel) {
+		Vector2<PacketInputFloat> delta;
+	} else if(input_type == PacketInputType::TextInput) {
+		u16 length;
+		CFixString8<length> text;
+	}
 };
 
 struct ReplayInputEvent {
 	ReplayInt size;
-	u8 data[size.value];
+	PacketInput data;
 };
 
 struct ReplayEvent {
 	ReplayEventType event_type;
 	u32 frame_id;
 
-	if (event_type == ReplayEventType::PlayerId1 || event_type == ReplayEventType::PlayerId2) {
-		ReplayPlayerId player_id;
-	} else if (event_type == ReplayEventType::Payload1 || event_type == ReplayEventType::Payload2 ||
-		event_type == ReplayEventType::Payload3 || event_type == ReplayEventType::Payload4 || event_type == ReplayEventType::Payload5) {
-		ReplayPayload packet_payload;
-	} else if (event_type == ReplayEventType::LoadPrefab) {
-		ReplayLoadPrefab load_prefab;
-	} else if (event_type == ReplayEventType::InputEvent) {
+	if (event_type == ReplayEventType::PlayerConnected || event_type == ReplayEventType::PlayerDisconnceted) {
+		ReplayPlayerEvent player_event;
+	} else if (event_type == ReplayEventType::EditorPacket || 
+		event_type == ReplayEventType::ClientUIPacket || event_type == ReplayEventType::ClientNoUIPacket ||
+		event_type == ReplayEventType::ServerUIPacket || event_type == ReplayEventType::ServerNoUIPacket) {
+		ReplayPacketEvent packet_event;
+	} else if (event_type == ReplayEventType::Prefab) {
+		ReplayPrefabEvent prefab_event;
+	} else if (event_type == ReplayEventType::Input) {
 		ReplayInputEvent input_event;
-	} else if (event_type == ReplayEventType::CustomEvent) {
+	} else if (event_type == ReplayEventType::Custom) {
 		ReplayCustomEvent custom_event;
 	} else {
 		std::assert(false, "unknown replay type");
