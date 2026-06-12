@@ -19,7 +19,7 @@ struct BlockAllocator {
 		u16 count;
 		BlockAllocatorInfo<u32> allocator_info[count];
 	} else {
-		if (version > 2) {
+		if (version >= 2) {
 			bool has_partial_info;
 		} else {
 			bool has_partial_info = false;
