@@ -10,9 +10,9 @@
 struct ForgeString {
 	u32 length;
 
-	bool is_utf16 = (length & 0x200000000) != 0;
-	bool is_xor_encrypted = (length & 0x400000000) != 0;
-	bool is_aes_encrypted = (length & 0x800000000) != 0;
+	bool is_utf16 = (length & 0x20000000) != 0;
+	bool is_xor_encrypted = (length & 0x40000000) != 0;
+	bool is_aes_encrypted = (length & 0x80000000) != 0;
 	bool is_encrypted = is_xor_encrypted || is_aes_encrypted;
 
 	u32 actual_length = (length & 0x1fffffff) * (is_utf16 ? 2 : 1);
